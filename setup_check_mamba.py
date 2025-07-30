@@ -95,6 +95,55 @@ def check_transformers():
         print(f"❌ Transformers test failed: {e}")
         return False
 
+def check_enhanced_dependencies():
+    """Check additional dependencies for enhanced extraction."""
+    dependencies = [
+        ("cv2", "OpenCV", lambda: __import__("cv2").__version__),
+        ("pytesseract", "Pytesseract", lambda: "installed"),
+        ("protobuf", "Protocol Buffers", lambda: "installed"),
+        ("sentencepiece", "SentencePiece", lambda: "installed"),
+    ]
+    
+    all_available = True
+    for module, name, version_func in dependencies:
+        try:
+            __import__(module)
+            version = version_func()
+            print(f"✅ {name} - {version}")
+        except ImportError:
+            print(f"❌ {name} not found")
+            all_available = False
+        except Exception as e:
+            print(f"⚠️  {name} - installed but version check failed: {e}")
+    
+    return all_available
+
+def check_tesseract_path():
+    """Check tesseract path configuration for mamba environment."""
+    print("Checking tesseract configuration...")
+    
+    # Check environment variables
+    conda_prefix = os.environ.get('CONDA_PREFIX')
+    mamba_prefix = os.environ.get('MAMBA_PREFIX')
+    
+    if conda_prefix:
+        tesseract_path = os.path.join(conda_prefix, 'bin', 'tesseract')
+        if os.path.exists(tesseract_path):
+            print(f"✅ Tesseract found in conda environment: {tesseract_path}")
+            return True
+        else:
+            print(f"⚠️  Tesseract not found at expected conda path: {tesseract_path}")
+    
+    # Check system tesseract
+    import shutil
+    system_tesseract = shutil.which('tesseract')
+    if system_tesseract:
+        print(f"✅ System tesseract found: {system_tesseract}")
+        return True
+    
+    print("❌ Tesseract not found - install with: mamba install tesseract")
+    return False
+
 def check_directories():
     """Check for required directories."""
     env_file = Path(".env")
@@ -221,6 +270,8 @@ def main():
     package_checks = [
         check_torch,
         check_transformers,
+        check_enhanced_dependencies,
+        check_tesseract_path,
     ]
     
     packages_passed = True

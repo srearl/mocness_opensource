@@ -22,6 +22,8 @@ from datetime import datetime
 
 import torch
 from PIL import Image
+import cv2
+import numpy as np
 from transformers import (
     LayoutLMv3ForQuestionAnswering,
     LayoutLMv3Processor,
@@ -151,17 +153,60 @@ class MOCNESSExtractor:
         
         return image
     
+    def enhance_image_for_ocr(self, image: Image.Image) -> Image.Image:
+        """Apply advanced image enhancement for better OCR."""
+        import cv2
+        import numpy as np
+        
+        # Convert PIL to OpenCV format
+        img_array = np.array(image)
+        if len(img_array.shape) == 3:
+            img_cv = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
+        else:
+            img_cv = img_array
+        
+        # Convert to grayscale
+        gray = cv2.cvtColor(img_cv, cv2.COLOR_BGR2GRAY) if len(img_cv.shape) == 3 else img_cv
+        
+        # Apply contrast enhancement
+        contrast_enhanced = cv2.convertScaleAbs(gray, alpha=1.5, beta=30)
+        
+        # Apply denoising
+        denoised = cv2.fastNlMeansDenoising(contrast_enhanced)
+        
+        # Convert back to PIL
+        enhanced_pil = Image.fromarray(denoised, mode='L')
+        
+        return enhanced_pil
+    
     def extract_with_tesseract(self, image: Image.Image) -> str:
         """Extract text using Tesseract OCR as fallback."""
         try:
-            # Convert to grayscale for better OCR
-            gray_image = image.convert('L')
+            # First try with enhanced image
+            enhanced_image = self.enhance_image_for_ocr(image)
             
-            # Use specific OCR configuration for forms
-            custom_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,°\'"()[]{}:;-_/@#$%&+=?!'
+            # Use multiple OCR configurations
+            configs = [
+                r'--oem 3 --psm 6',  # Basic configuration
+                r'--oem 3 --psm 11', # Detailed sparse text
+                r'--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,°\'"()[]{}:;-_/@#$%&+=?!'
+            ]
             
-            text = pytesseract.image_to_string(gray_image, config=custom_config)
-            return text.strip()
+            results = []
+            for config in configs:
+                try:
+                    text = pytesseract.image_to_string(enhanced_image, config=config)
+                    if text.strip():
+                        results.append(text.strip())
+                except Exception as e:
+                    logger.warning(f"OCR config failed: {config}, error: {e}")
+                    continue
+            
+            # Return the longest result (usually more complete)
+            if results:
+                return max(results, key=len)
+            else:
+                return ""
             
         except Exception as e:
             logger.error(f"Error with Tesseract OCR: {e}")
@@ -418,26 +463,49 @@ class MOCNESSExtractor:
         
         if not is_notes:
             # Form page parsing
-            # Look for cruise number
-            cruise_match = re.search(r'CRUISE[:\s]*(\d+)', text_upper)
-            if cruise_match:
-                info['cruise'] = cruise_match.group(1)
+            # Look for cruise number (various patterns)
+            cruise_patterns = [
+                r'CRUISE[:\s]*(\d+)',
+                r'(\d{4})[:\s]*CRUISE',
+                r'(\d{4})[OF]*\s*(?:LOCATION|LOC)',  # Pattern like "2407 Location"
+            ]
+            for pattern in cruise_patterns:
+                cruise_match = re.search(pattern, text_upper)
+                if cruise_match:
+                    info['cruise'] = cruise_match.group(1)
+                    break
             
             # Look for tow number
-            tow_match = re.search(r'TOW[:\s#]*(\d+)', text_upper)
-            if tow_match:
-                info['tow'] = tow_match.group(1)
+            tow_patterns = [
+                r'TOW[:\s#]*(\d+)',
+                r'TOW#\s*(\w+)',
+                r'MOC[:\s]*(\d+)'
+            ]
+            for pattern in tow_patterns:
+                tow_match = re.search(pattern, text_upper)
+                if tow_match:
+                    info['tow'] = tow_match.group(1)
+                    break
             
-            # Look for location
-            location_match = re.search(r'LOCATION[:\s]*([A-Z\s]+)', text_upper)
-            if location_match:
-                info['location'] = location_match.group(1).strip()
+            # Look for location (improved patterns)
+            location_patterns = [
+                r'LOCATION[:\s]*([A-Z\s]+?)(?:TOW|DATE|\d|$)',
+                r'(?:GUAYMAS|BASIN|GULF)[A-Z\s]*',
+                r'BASIN[:\s]*([A-Z\s]+)',
+            ]
+            for pattern in location_patterns:
+                location_match = re.search(pattern, text_upper)
+                if location_match:
+                    location = location_match.group(1) if len(location_match.groups()) > 0 else location_match.group(0)
+                    info['location'] = location.strip()
+                    break
             
-            # Look for date patterns
+            # Look for date patterns (enhanced)
             date_patterns = [
                 r'(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})',
                 r'(\d{4}[/-]\d{1,2}[/-]\d{1,2})',
-                r'(\d{1,2}\s+\w+\s+\d{4})'
+                r'(\d{1,2}\s+\w+\s+\d{4})',
+                r'DATE[:\s]*(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})'
             ]
             for pattern in date_patterns:
                 date_match = re.search(pattern, text)
@@ -454,28 +522,69 @@ class MOCNESSExtractor:
             if lon_match:
                 info['longitude'] = lon_match.group(1)
                 
-            # Look for times
+            # Look for times (4-digit patterns)
             time_matches = re.findall(r'(\d{4})', text)
             if len(time_matches) >= 2:
                 info['times'] = time_matches[:4]  # Start/end local and GMT
+            
+            # Look for net information
+            net_match = re.search(r'NET[:\s]*(\d+)', text_upper)
+            if net_match:
+                info['net_size'] = net_match.group(1)
+                
+            # Look for mesh size
+            mesh_patterns = [
+                r'(\d+\s*[μµ]M)',
+                r'MESH[:\s]*(\d+)',
+                r'(\d+)\s*MICRON'
+            ]
+            for pattern in mesh_patterns:
+                mesh_match = re.search(pattern, text_upper)
+                if mesh_match:
+                    info['net_mesh'] = mesh_match.group(1)
+                    break
                 
         else:
-            # Notes page parsing
-            # Look for net information
-            net_matches = re.findall(r'N(\d+)[:\s-]*([^N]+)', text_upper)
-            if net_matches:
-                info['net_observations'] = {}
-                for net_num, observation in net_matches:
-                    info['net_observations'][f'N{net_num}'] = observation.strip()
+            # Notes page parsing (enhanced)
+            # Look for net observations with better patterns
+            net_patterns = [
+                r'N(\d+)[:\s-]*([^N\n]+)',  # N1 - observation
+                r'(\d+)[:\s-]*([A-Z][^N\n]+)',  # Just number - observation
+            ]
             
-            # Look for biological terms
-            bio_terms = ['JELLIE', 'COPEPOD', 'AMPHIPOD', 'HETEROPOD', 'PYROSOME', 
-                        'SALP', 'CTEN', 'DNA', 'PRESERVE', 'SPLIT']
-            found_terms = []
-            for term in bio_terms:
+            info['net_observations'] = {}
+            for pattern in net_patterns:
+                net_matches = re.findall(pattern, text_upper)
+                for net_num, observation in net_matches:
+                    net_key = f'N{net_num}' if net_num.isdigit() else net_num
+                    info['net_observations'][net_key] = observation.strip()
+            
+            # Look for specific biological observations
+            bio_observations = []
+            bio_patterns = [
+                r'MASSIVE\s+([A-Z]+)',  # MASSIVE ATOLLA
+                r'JELLIES?\s+([A-Z\s]+)',  # jellies separate bottle
+                r'([A-Z]+PODS?)\s*',  # myctopods, copepods
+                r'(SALP[A-Z]*)',  # salps
+                r'(SHRIMP[A-Z]*)',  # shrimp
+                r'DNA\s+([A-Z\s]+)',  # DNA related
+            ]
+            
+            for pattern in bio_patterns:
+                matches = re.findall(pattern, text_upper)
+                bio_observations.extend(matches)
+            
+            if bio_observations:
+                info['biological_observations'] = list(set(bio_observations))  # Remove duplicates
+            
+            # Look for preservation methods
+            preservation_terms = ['FORMALIN', 'ETHANOL', 'FROZEN', 'DNA']
+            found_preservation = []
+            for term in preservation_terms:
                 if term in text_upper:
-                    found_terms.append(term.lower())
-            info['biological_terms'] = found_terms
+                    found_preservation.append(term.lower())
+            if found_preservation:
+                info['preservation_methods'] = found_preservation
         
         return info
     

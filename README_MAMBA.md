@@ -14,7 +14,7 @@ cd mocness_opensource
 mamba env create -f environment.yml
 
 # Activate the environment
-mamba activate mocness-extraction
+source activate mocness-extraction
 
 # Verify setup
 python setup_check_mamba.py
@@ -166,7 +166,7 @@ The `environment.yml` includes:
 conda env create -f environment.yml
 
 # If pip packages fail
-mamba activate mocness-extraction
+source activate mocness-extraction
 pip install transformers datasets python-dotenv huggingface-hub
 
 # Clear cache if needed
