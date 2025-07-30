@@ -1,0 +1,16 @@
+[project]
+name = "mocness-opensource"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "datasets>=4.0.0",
+    "opencv-python>=4.12.0.88",
+    "pillow>=11.3.0",
+    "pytesseract>=0.3.13",
+    "python-dotenv>=1.1.1",
+    "torch>=2.7.1",
+    "torchvision>=0.22.1",
+    "transformers>=4.54.1",
+]
