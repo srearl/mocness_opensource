@@ -33,6 +33,18 @@ from transformers import (
 from datasets import Dataset
 from dotenv import load_dotenv
 
+# Configure tesseract path if in conda environment
+try:
+    import pytesseract
+    conda_prefix = os.environ.get('CONDA_PREFIX')
+    if conda_prefix:
+        tesseract_path = os.path.join(conda_prefix, 'bin', 'tesseract')
+        if os.path.exists(tesseract_path):
+            pytesseract.pytesseract.tesseract_cmd = tesseract_path
+            print(f"Set tesseract path to: {tesseract_path}")
+except ImportError:
+    pass
+
 from config import MOCNESS_QUESTIONS, MODELS
 from utils import (
     check_gpu_availability, 
@@ -182,34 +194,56 @@ class MOCNESSExtractor:
             self.load_donut()
             
         try:
+            # Ensure image is in RGB format
+            if image.mode != 'RGB':
+                image = image.convert('RGB')
+            
             # Prepare image
             pixel_values = self.donut_processor(image, return_tensors="pt").pixel_values
+            
+            # Check if pixel_values is None or empty
+            if pixel_values is None:
+                logger.error("Donut processor returned None pixel_values")
+                return {}
+                
             pixel_values = pixel_values.to(self.device)
             
-            # Generate
+            # Generate with simpler parameters
             decoder_input_ids = torch.tensor([[self.donut_model.config.decoder_start_token_id]])
             decoder_input_ids = decoder_input_ids.to(self.device)
             
+            # Use simpler generation parameters to avoid issues
             outputs = self.donut_model.generate(
                 pixel_values,
                 decoder_input_ids=decoder_input_ids,
-                max_length=self.donut_model.decoder.config.max_position_embeddings,
+                max_length=256,  # Reduced max length
                 early_stopping=True,
                 pad_token_id=self.donut_processor.tokenizer.pad_token_id,
                 eos_token_id=self.donut_processor.tokenizer.eos_token_id,
                 use_cache=True,
                 num_beams=1,
-                bad_words_ids=[[self.donut_processor.tokenizer.unk_token_id]],
                 return_dict_in_generate=True,
             )
             
-            sequence = self.donut_processor.batch_decode(outputs.sequences)[0]
-            sequence = sequence.replace(self.donut_processor.tokenizer.eos_token, "").replace(
-                self.donut_processor.tokenizer.pad_token, ""
-            )
-            sequence = sequence.split(f"<s_{self.donut_model.decoder.config.task_start_token}>")[1].strip()
-            
-            return {"extracted_text": sequence}
+            # Decode the output
+            if hasattr(outputs, 'sequences') and outputs.sequences is not None:
+                sequence = self.donut_processor.batch_decode(outputs.sequences)[0]
+                sequence = sequence.replace(self.donut_processor.tokenizer.eos_token, "").replace(
+                    self.donut_processor.tokenizer.pad_token, ""
+                )
+                # Try to extract meaningful content
+                if "<s_" in sequence:
+                    try:
+                        sequence = sequence.split(f"<s_")[1].strip()
+                        if ">" in sequence:
+                            sequence = sequence.split(">")[1].strip()
+                    except IndexError:
+                        pass
+                
+                return {"extracted_text": sequence}
+            else:
+                logger.error("Donut generation returned no sequences")
+                return {}
             
         except Exception as e:
             logger.error(f"Error with Donut extraction: {e}")

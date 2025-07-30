@@ -29,9 +29,21 @@ echo "=== Installing Missing Dependencies ==="
 echo "Installing system dependencies..."
 mamba install -y tesseract protobuf sentencepiece
 
+# Check if tesseract is in PATH
+echo "Checking tesseract PATH..."
+which tesseract || echo "⚠️ tesseract not found in PATH"
+
+# Install tesseract-ocr system package if needed
+echo "Installing system tesseract-ocr package..."
+mamba install -y tesseract-ocr || echo "Trying alternative tesseract installation..."
+
+# Add conda-forge channel for better tesseract support
+echo "Adding conda-forge channel for tesseract..."
+mamba install -c conda-forge -y tesseract pytesseract
+
 # Install additional Python packages for LayoutLMv3
 echo "Installing LayoutLMv3 dependencies..."
-pip install layoutparser[layoutmodels,tesseract] 
+pip install layoutparser[layoutmodels,tesseract] || echo "LayoutParser installation failed" 
 
 # Try to install detectron2 (may fail on some systems)
 echo "Attempting to install detectron2..."
@@ -41,10 +53,57 @@ pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cpu/t
 echo "Installing additional tokenizer dependencies..."
 pip install tokenizers sentencepiece protobuf
 
+# Set tesseract path if needed
+echo "Setting up tesseract path..."
+python -c "
+import pytesseract
+import os
+# Try to find tesseract in common conda locations
+possible_paths = [
+    os.path.join(os.environ.get('CONDA_PREFIX', ''), 'bin', 'tesseract'),
+    '/usr/bin/tesseract',
+    '/usr/local/bin/tesseract'
+]
+for path in possible_paths:
+    if os.path.exists(path):
+        print(f'Found tesseract at: {path}')
+        pytesseract.pytesseract.tesseract_cmd = path
+        break
+else:
+    print('Could not find tesseract binary')
+"
+
 echo
 echo "=== Verification ==="
 echo "Testing tesseract installation..."
-which tesseract && tesseract --version
+which tesseract && tesseract --version || echo "❌ tesseract binary not found"
+
+echo
+echo "Testing tesseract accessibility from Python..."
+python -c "
+import subprocess
+try:
+    result = subprocess.run(['tesseract', '--version'], capture_output=True, text=True)
+    print(f'✅ Tesseract accessible from Python: {result.stdout.split()[1]}')
+except Exception as e:
+    print(f'❌ Tesseract not accessible from Python: {e}')
+"
+
+echo
+echo "Testing pytesseract Python package..."
+python -c "
+try:
+    import pytesseract
+    print(f'✅ pytesseract imported successfully')
+    # Test if pytesseract can find tesseract
+    try:
+        version = pytesseract.get_tesseract_version()
+        print(f'✅ pytesseract can access tesseract: {version}')
+    except Exception as e:
+        print(f'❌ pytesseract cannot access tesseract: {e}')
+except Exception as e:
+    print(f'❌ pytesseract import failed: {e}')
+"
 
 echo
 echo "Testing protobuf installation..."
