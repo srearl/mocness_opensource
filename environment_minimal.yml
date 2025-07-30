@@ -1,4 +1,4 @@
-name: mocness-extraction
+name: mocness-extraction-minimal
 channels:
   - conda-forge
   - pytorch
@@ -10,8 +10,6 @@ dependencies:
   - pip
   - pillow>=10.0
   - opencv
-  - tesseract
-  - pytesseract
   - protobuf
   - sentencepiece
   - pip:
@@ -19,4 +17,4 @@ dependencies:
     - datasets>=4.0.0
     - python-dotenv>=1.0.0
     - huggingface-hub
-    - layoutparser[layoutmodels,tesseract]
+    - pytesseract

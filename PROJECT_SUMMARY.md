@@ -23,8 +23,11 @@ This project implements an **open source solution** for extracting structured da
 ├── setup_check_mamba.py   # ✅ Setup verification script (Mamba/HPC version)
 ├── create_samples.py      # ✅ Sample image generator
 ├── setup_hpc.sh           # ✅ HPC installation script
+├── hpc_troubleshoot.sh    # ✅ Basic HPC troubleshooting
+├── hpc_troubleshoot_comprehensive.sh # ✅ Complete HPC fixes
 ├── pyproject.toml         # ✅ Dependencies configured (UV)
 ├── environment.yml        # ✅ Dependencies configured (Mamba/Conda)
+├── environment_minimal.yml # ✅ Minimal fallback environment
 ├── .env                   # ✅ Environment variables
 ├── .vscode/
 │   ├── tasks.json         # ✅ VS Code tasks (UV version)
@@ -106,20 +109,36 @@ This project implements an **open source solution** for extracting structured da
    - **Root Cause**: Accessing `encoding.input_ids` instead of `encoding['input_ids']`
    - **Solution**: Updated main.py to use dictionary access
    
-2. **Missing Dependencies**: Added to environment.yml and troubleshooting script
+2. **Donut Dtype Error**: Fixed `Could not infer dtype of NoneType` error
+   - **Root Cause**: Improper image processing and null tensor handling
+   - **Solution**: Added image format validation and null checks
+   
+3. **Missing Dependencies**: Added to environment.yml and troubleshooting script
    - **protobuf**: Required for Donut model tokenizer
    - **sentencepiece**: Required for Donut tokenizer instantiation
-   - **tesseract**: System dependency for LayoutLMv3
-   - **layoutparser**: Additional LayoutLMv3 dependencies
+   - **tesseract**: System dependency for LayoutLMv3 (HPC installation challenge)
 
-### 📋 Next Steps for Full HPC Deployment
-1. **Update Environment**: Recreate with new environment.yml
-2. **Install Dependencies**: Run `./hpc_troubleshoot_comprehensive.sh`
-3. **Test Individual Methods**:
-   - `python main.py --method trocr` (already working)
-   - `python main.py --method layoutlm` (should work after fixes)
-   - `python main.py --method donut` (should work after dependencies)
-4. **Full Pipeline Test**: `python main.py` (all methods together)
+4. **Environment Installation**: Fixed conda package conflicts
+   - **Issue**: `tesseract-ocr` package doesn't exist in conda channels
+   - **Solution**: Created working `environment.yml` and `environment_minimal.yml`
+
+### 📋 HPC Environment Setup (Current Instructions)
+**Option A: Standard Environment (Recommended)**
+```bash
+mamba env create -f environment.yml
+mamba activate mocness-extraction
+```
+
+**Option B: If Standard Fails (Minimal)**
+```bash
+mamba env create -f environment_minimal.yml
+mamba activate mocness-extraction-minimal
+```
+
+**Option C: Comprehensive Troubleshooting**
+```bash
+./hpc_troubleshoot_comprehensive.sh
+```
 3. **File Processing**: ✅ Automated discovery and batch processing
 4. **Output Generation**: ✅ JSON, CSV, and summary reports created
 5. **Error Handling**: ✅ Graceful degradation when models fail

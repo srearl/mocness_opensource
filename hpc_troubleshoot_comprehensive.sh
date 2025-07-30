@@ -33,13 +33,18 @@ mamba install -y tesseract protobuf sentencepiece
 echo "Checking tesseract PATH..."
 which tesseract || echo "⚠️ tesseract not found in PATH"
 
-# Install tesseract-ocr system package if needed
-echo "Installing system tesseract-ocr package..."
-mamba install -y tesseract-ocr || echo "Trying alternative tesseract installation..."
+# Try alternative tesseract installation methods
+echo "Trying alternative tesseract installation..."
+# Try installing from conda-forge specifically
+mamba install -c conda-forge -y tesseract pytesseract || echo "conda-forge tesseract failed"
 
-# Add conda-forge channel for better tesseract support
-echo "Adding conda-forge channel for tesseract..."
-mamba install -c conda-forge -y tesseract pytesseract
+# If still not found, try system package manager (if available)
+if ! which tesseract > /dev/null 2>&1; then
+    echo "Attempting system package installation..."
+    # Note: This may not work on HPC without sudo
+    # sudo apt-get install -y tesseract-ocr || echo "System tesseract installation failed (expected on HPC)"
+    echo "Consider asking HPC admin to install tesseract system-wide"
+fi
 
 # Install additional Python packages for LayoutLMv3
 echo "Installing LayoutLMv3 dependencies..."
