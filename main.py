@@ -45,7 +45,7 @@ try:
 except ImportError:
     pass
 
-from config import MOCNESS_QUESTIONS, MODELS
+from config import MOCNESS_QUESTIONS, MODELS, FORM_QUESTIONS, NOTES_QUESTIONS
 from utils import (
     check_gpu_availability, 
     save_results_as_csv, 
@@ -136,16 +136,56 @@ class MOCNESSExtractor:
             logger.error(f"Error loading Donut: {e}")
             raise
     
+    def preprocess_image(self, image: Image.Image) -> Image.Image:
+        """Preprocess image for better OCR results."""
+        # Convert to RGB if needed
+        if image.mode != 'RGB':
+            image = image.convert('RGB')
+        
+        # Resize if too large (TrOCR works better with reasonable sizes)
+        max_size = 2048
+        if max(image.size) > max_size:
+            ratio = max_size / max(image.size)
+            new_size = tuple(int(dim * ratio) for dim in image.size)
+            image = image.resize(new_size, Image.Resampling.LANCZOS)
+        
+        return image
+    
+    def extract_with_tesseract(self, image: Image.Image) -> str:
+        """Extract text using Tesseract OCR as fallback."""
+        try:
+            # Convert to grayscale for better OCR
+            gray_image = image.convert('L')
+            
+            # Use specific OCR configuration for forms
+            custom_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,°\'"()[]{}:;-_/@#$%&+=?!'
+            
+            text = pytesseract.image_to_string(gray_image, config=custom_config)
+            return text.strip()
+            
+        except Exception as e:
+            logger.error(f"Error with Tesseract OCR: {e}")
+            return ""
+    
     def extract_with_trocr(self, image: Image.Image) -> str:
         """Extract text using TrOCR."""
         if not self.trocr_processor or not self.trocr_model:
             self.load_trocr()
             
         try:
+            # Preprocess image
+            image = self.preprocess_image(image)
+            
             pixel_values = self.trocr_processor(image, return_tensors="pt").pixel_values
             pixel_values = pixel_values.to(self.device)
             
-            generated_ids = self.trocr_model.generate(pixel_values)
+            # Use better generation parameters
+            generated_ids = self.trocr_model.generate(
+                pixel_values,
+                max_length=512,
+                num_beams=4,
+                early_stopping=True
+            )
             generated_text = self.trocr_processor.batch_decode(
                 generated_ids, skip_special_tokens=True
             )[0]
@@ -270,8 +310,16 @@ class MOCNESSExtractor:
             # Load image
             image = Image.open(image_path).convert('RGB')
             
-            # Define questions for form fields (from config)
-            questions = MOCNESS_QUESTIONS
+            # Determine if this is a form or notes page based on filename
+            is_notes_page = "notes" in str(image_path).lower()
+            
+            # Choose appropriate questions
+            if is_notes_page:
+                questions = NOTES_QUESTIONS
+                logger.info("Processing as notes page")
+            else:
+                questions = FORM_QUESTIONS  
+                logger.info("Processing as form page")
             
             # Extract with multiple methods
             results = {
@@ -279,6 +327,14 @@ class MOCNESSExtractor:
                 "timestamp": datetime.now().isoformat(),
                 "extraction_methods": {}
             }
+            
+            # Method 0: Tesseract OCR as baseline
+            if method in ["tesseract", "all"]:
+                logger.info("Extracting with Tesseract OCR...")
+                tesseract_text = self.extract_with_tesseract(image)
+                results["extraction_methods"]["tesseract"] = {
+                    "raw_text": tesseract_text
+                }
             
             # Method 1: TrOCR for basic text extraction
             if method in ["trocr", "all"]:
@@ -309,6 +365,145 @@ class MOCNESSExtractor:
                 "error": str(e),
                 "timestamp": datetime.now().isoformat()
             }
+    
+    def extract_hybrid_approach(self, image_path: str) -> Dict:
+        """Use a hybrid approach combining all methods intelligently."""
+        logger.info(f"Using hybrid extraction for: {image_path}")
+        
+        try:
+            image = Image.open(image_path).convert('RGB')
+            is_notes_page = "notes" in str(image_path).lower()
+            
+            # Start with OCR to get raw text
+            tesseract_text = self.extract_with_tesseract(image)
+            trocr_text = self.extract_with_trocr(image)
+            
+            # Combine OCR results for better coverage
+            combined_text = f"Tesseract: {tesseract_text}\n\nTrOCR: {trocr_text}"
+            
+            # Use appropriate questions
+            questions = NOTES_QUESTIONS if is_notes_page else FORM_QUESTIONS
+            
+            # Get structured answers
+            layoutlm_results = self.extract_with_layoutlm(image, questions)
+            
+            # Try to extract key information from raw text
+            extracted_info = self.parse_raw_text(combined_text, is_notes_page)
+            
+            return {
+                "file_path": image_path,
+                "timestamp": datetime.now().isoformat(),
+                "page_type": "notes" if is_notes_page else "form",
+                "raw_ocr": {
+                    "tesseract": tesseract_text,
+                    "trocr": trocr_text
+                },
+                "structured_qa": layoutlm_results,
+                "parsed_info": extracted_info,
+                "combined_extraction": self.combine_extractions(
+                    layoutlm_results, extracted_info, combined_text
+                )
+            }
+            
+        except Exception as e:
+            logger.error(f"Error in hybrid extraction for {image_path}: {e}")
+            return {"file_path": image_path, "error": str(e)}
+    
+    def parse_raw_text(self, text: str, is_notes: bool) -> Dict:
+        """Parse useful information from raw OCR text."""
+        import re
+        
+        info = {}
+        text_upper = text.upper()
+        
+        if not is_notes:
+            # Form page parsing
+            # Look for cruise number
+            cruise_match = re.search(r'CRUISE[:\s]*(\d+)', text_upper)
+            if cruise_match:
+                info['cruise'] = cruise_match.group(1)
+            
+            # Look for tow number
+            tow_match = re.search(r'TOW[:\s#]*(\d+)', text_upper)
+            if tow_match:
+                info['tow'] = tow_match.group(1)
+            
+            # Look for location
+            location_match = re.search(r'LOCATION[:\s]*([A-Z\s]+)', text_upper)
+            if location_match:
+                info['location'] = location_match.group(1).strip()
+            
+            # Look for date patterns
+            date_patterns = [
+                r'(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})',
+                r'(\d{4}[/-]\d{1,2}[/-]\d{1,2})',
+                r'(\d{1,2}\s+\w+\s+\d{4})'
+            ]
+            for pattern in date_patterns:
+                date_match = re.search(pattern, text)
+                if date_match:
+                    info['date'] = date_match.group(1)
+                    break
+            
+            # Look for coordinates
+            lat_match = re.search(r"(\d+°\d+\.\d+'[NS])", text)
+            if lat_match:
+                info['latitude'] = lat_match.group(1)
+                
+            lon_match = re.search(r"(\d+°\d+\.\d+'[EW])", text)
+            if lon_match:
+                info['longitude'] = lon_match.group(1)
+                
+            # Look for times
+            time_matches = re.findall(r'(\d{4})', text)
+            if len(time_matches) >= 2:
+                info['times'] = time_matches[:4]  # Start/end local and GMT
+                
+        else:
+            # Notes page parsing
+            # Look for net information
+            net_matches = re.findall(r'N(\d+)[:\s-]*([^N]+)', text_upper)
+            if net_matches:
+                info['net_observations'] = {}
+                for net_num, observation in net_matches:
+                    info['net_observations'][f'N{net_num}'] = observation.strip()
+            
+            # Look for biological terms
+            bio_terms = ['JELLIE', 'COPEPOD', 'AMPHIPOD', 'HETEROPOD', 'PYROSOME', 
+                        'SALP', 'CTEN', 'DNA', 'PRESERVE', 'SPLIT']
+            found_terms = []
+            for term in bio_terms:
+                if term in text_upper:
+                    found_terms.append(term.lower())
+            info['biological_terms'] = found_terms
+        
+        return info
+    
+    def combine_extractions(self, layoutlm_results: Dict, parsed_info: Dict, raw_text: str) -> Dict:
+        """Intelligently combine results from different extraction methods."""
+        combined = {}
+        
+        # Prefer parsed_info for key fields, fallback to layoutlm
+        key_fields = ['cruise', 'tow', 'location', 'date', 'latitude', 'longitude']
+        
+        for field in key_fields:
+            if field in parsed_info and parsed_info[field]:
+                combined[field] = parsed_info[field]
+            else:
+                # Look for related answers in layoutlm results
+                for question, answer in layoutlm_results.items():
+                    if field.lower() in question.lower() and answer.strip():
+                        combined[field] = answer
+                        break
+        
+        # Add all unique information
+        combined.update(parsed_info)
+        
+        # Add confidence score based on how much data we extracted
+        total_fields = len(combined)
+        combined['extraction_confidence'] = min(1.0, total_fields / 10.0)
+        
+        return combined
     
     def process_directory(self, input_dir: str, output_dir: str, method: str = "all") -> None:
         """Process all MOCNESS images in a directory and combine form/notes by tow."""

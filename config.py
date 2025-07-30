@@ -23,30 +23,63 @@ MODELS = {
 
 # Default extraction questions for MOCNESS forms
 MOCNESS_QUESTIONS = [
-    "What is the station number?",
+    "What is the cruise number?",
     "What is the tow number?", 
     "What is the date?",
-    "What is the start time?",
-    "What is the end time?",
-    "What is the latitude?",
-    "What is the longitude?",
-    "What is the depth?",
-    "What is the maximum depth?",
-    "What is the volume filtered?",
-    "What is the flowmeter reading?",
-    "What is the flowmeter start reading?",
-    "What is the flowmeter end reading?",
-    "What are the net mesh sizes?",
-    "What is the vessel name?",
-    "What is the cruise name?",
-    "Who is the chief scientist?",
-    "Who collected this sample?",
-    "What is the weather condition?",
+    "What is the location?",
+    "What time did the tow start?",
+    "What time did the tow end?",
+    "What is the GMT start time?",
+    "What is the GMT end time?",
+    "What is the start latitude?",
+    "What is the start longitude?",
+    "What is the end latitude?",
+    "What is the end longitude?",
+    "What is the wind speed?",
+    "What is the wind direction?",
     "What is the sea state?",
-    "What are the comments or notes?",
+    "What is the net size?",
+    "What is the net mesh?",
+    "What is the net condition?",
+    "What are the general comments?",
     "What equipment was used?",
-    "What is the net type?",
-    "What is the sampling method?"
+    "What is the maximum depth reached?",
+    "What flowmeter readings were recorded?",
+    "What volumes were filtered?",
+    "What biological observations were made?"
+]
+
+# Specific questions for form vs notes pages
+FORM_QUESTIONS = [
+    "What is the cruise number?",
+    "What is the tow number?", 
+    "What is the date?",
+    "What is the location?",
+    "What is the local start time?",
+    "What is the local end time?",
+    "What is the GMT start time?",
+    "What is the GMT end time?",
+    "What is the start latitude?",
+    "What is the start longitude?", 
+    "What is the end latitude?",
+    "What is the end longitude?",
+    "What is the wind speed?",
+    "What is the wind direction?",
+    "What is the sea state?",
+    "What is the net size?",
+    "What is the net mesh size?",
+    "What is the net condition percentage?"
+]
+
+NOTES_QUESTIONS = [
+    "What biological specimens were observed?",
+    "What are the comments for each net?",
+    "What preservation methods were used?",
+    "What special observations were made?",
+    "What samples were collected for DNA?",
+    "What jellies or other organisms were noted?",
+    "What splitting ratios were recorded?",
+    "What biomass observations were made?"
 ]
 
 # File patterns
