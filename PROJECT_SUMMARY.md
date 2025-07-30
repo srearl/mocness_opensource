@@ -74,14 +74,17 @@ This project implements an **open source solution** for extracting structured da
 
 ### 2. Automated Processing
 - Batch processing of multiple images
+- **Intelligent Grouping**: Automatically groups form and notes by tow number
+- **Combined Output**: Single JSON per tow containing both form and notes data
 - Automatic file discovery (pattern: `tow_*_form.png`, `tow_*_notes.png`)
 - Error handling and logging
 - Progress reporting
 
 ### 3. Output Formats
-- **JSON**: Detailed extraction results per image
-- **CSV**: Tabular format for analysis
-- **Summary Report**: Processing statistics
+- **JSON by Tow**: Individual JSON files per tow combining form and notes data (`tow_001_complete.json`)
+- **Combined JSON**: All tows in single file (`all_tows_extracted.json`)
+- **CSV**: Tabular format with separate rows for form/notes data
+- **Summary Report**: Processing statistics by tow
 - **Logs**: Detailed processing information
 
 ### 4. User Experience
@@ -227,6 +230,35 @@ python main.py --method trocr  # Fastest
 - **Batch Upload**: Add drag-and-drop interface
 - **Export Options**: Add Excel export, database integration
 - **Validation**: Add data validation rules for extracted fields
+
+## 📊 Output Structure
+
+### Individual Tow Files (`tow_XXX_complete.json`)
+```json
+{
+  "tow_number": "001",
+  "timestamp": "2025-07-30T12:34:56",
+  "extraction_method": "all",
+  "form_data": {
+    "file_path": "input/tow_001_form.png",
+    "extraction_methods": {
+      "trocr": { "raw_text": "..." },
+      "layoutlm": { "What is the station number?": "...", ... },
+      "donut": { "extracted_text": "..." }
+    }
+  },
+  "notes_data": {
+    "file_path": "input/tow_001_notes.png",
+    "extraction_methods": { ... }
+  }
+}
+```
+
+### Combined File (`all_tows_extracted.json`)
+Array of all individual tow results for comprehensive analysis.
+
+### CSV Output (`all_extractions.csv`)
+Flattened structure with separate rows for form and notes data, including `data_type` column to distinguish between form/notes entries.
 
 ## 📊 Expected Performance
 

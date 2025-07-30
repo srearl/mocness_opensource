@@ -50,7 +50,9 @@ from utils import (
     check_gpu_availability, 
     save_results_as_csv, 
     create_summary_report, 
-    validate_image_files
+    validate_image_files,
+    save_results_as_csv_by_tow,
+    create_summary_report_by_tow
 )
 
 # Load environment variables
@@ -309,7 +311,7 @@ class MOCNESSExtractor:
             }
     
     def process_directory(self, input_dir: str, output_dir: str, method: str = "all") -> None:
-        """Process all MOCNESS images in a directory."""
+        """Process all MOCNESS images in a directory and combine form/notes by tow."""
         input_path = Path(input_dir)
         output_path = Path(output_dir)
         output_path.mkdir(parents=True, exist_ok=True)
@@ -324,40 +326,80 @@ class MOCNESSExtractor:
             logger.error(f"Error validating input directory: {e}")
             return
         
-        # Find all tow form and notes images
+        # Find and group files by tow number
         form_files = list(input_path.glob("tow_*_form.png"))
         notes_files = list(input_path.glob("tow_*_notes.png"))
         
-        all_files = form_files + notes_files
-        logger.info(f"Processing {len(all_files)} files using method: {method}")
+        # Group files by tow number
+        tow_groups = {}
         
-        results = []
+        # Process form files
+        for form_file in form_files:
+            # Extract tow number from filename (e.g., "tow_001_form.png" -> "001")
+            tow_num = form_file.stem.split('_')[1]
+            if tow_num not in tow_groups:
+                tow_groups[tow_num] = {}
+            tow_groups[tow_num]['form'] = form_file
         
-        for i, image_file in enumerate(all_files, 1):
-            logger.info(f"Processing file {i}/{len(all_files)}: {image_file.name}")
+        # Process notes files
+        for notes_file in notes_files:
+            # Extract tow number from filename (e.g., "tow_001_notes.png" -> "001")
+            tow_num = notes_file.stem.split('_')[1]
+            if tow_num not in tow_groups:
+                tow_groups[tow_num] = {}
+            tow_groups[tow_num]['notes'] = notes_file
+        
+        logger.info(f"Processing {len(tow_groups)} tow groups using method: {method}")
+        
+        all_results = []
+        
+        for tow_num, files in tow_groups.items():
+            logger.info(f"Processing tow {tow_num}")
             
-            # Extract data
-            extracted_data = self.process_mocness_form(str(image_file), method)
-            results.append(extracted_data)
+            # Initialize combined result for this tow
+            combined_result = {
+                "tow_number": tow_num,
+                "timestamp": datetime.now().isoformat(),
+                "extraction_method": method,
+                "form_data": {},
+                "notes_data": {}
+            }
             
-            # Save individual result
-            output_file = output_path / f"{image_file.stem}_extracted.json"
-            with open(output_file, 'w') as f:
-                json.dump(extracted_data, f, indent=2)
+            # Process form file if it exists
+            if 'form' in files:
+                logger.info(f"Processing form: {files['form']}")
+                form_data = self.process_mocness_form(str(files['form']), method)
+                combined_result["form_data"] = form_data
+            else:
+                logger.warning(f"No form file found for tow {tow_num}")
             
-            logger.info(f"Saved results to {output_file}")
+            # Process notes file if it exists
+            if 'notes' in files:
+                logger.info(f"Processing notes: {files['notes']}")
+                notes_data = self.process_mocness_form(str(files['notes']), method)
+                combined_result["notes_data"] = notes_data
+            else:
+                logger.warning(f"No notes file found for tow {tow_num}")
+            
+            # Save individual tow result
+            tow_output_file = output_path / f"tow_{tow_num}_complete.json"
+            with open(tow_output_file, 'w') as f:
+                json.dump(combined_result, f, indent=2)
+            
+            logger.info(f"Saved combined results for tow {tow_num} to {tow_output_file}")
+            all_results.append(combined_result)
         
-        # Save combined results
-        combined_file = output_path / "all_extractions.json"
-        with open(combined_file, 'w') as f:
-            json.dump(results, f, indent=2)
+        # Save all tows combined results
+        all_tows_file = output_path / "all_tows_extracted.json"
+        with open(all_tows_file, 'w') as f:
+            json.dump(all_results, f, indent=2)
         
-        # Save as CSV
+        # Save as CSV (flattened structure)
         csv_file = output_path / "all_extractions.csv"
-        save_results_as_csv(results, str(csv_file))
+        save_results_as_csv_by_tow(all_results, str(csv_file))
         
         # Create summary report
-        create_summary_report(results, str(output_path))
+        create_summary_report_by_tow(all_results, str(output_path))
         
         logger.info(f"Processing complete. Results saved to {output_path}")
 

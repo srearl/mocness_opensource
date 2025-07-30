@@ -188,3 +188,179 @@ def test_model_loading():
     except Exception as e:
         logger.error(f"Model loading test failed: {e}")
         return False
+
+
+def save_results_as_csv_by_tow(results: List[Dict], output_file: str):
+    """Save tow-based extraction results as CSV file."""
+    if not results:
+        logger.warning("No results to save")
+        return
+    
+    # Flatten the nested structure for CSV
+    flattened_results = []
+    
+    for tow_result in results:
+        tow_num = tow_result.get("tow_number", "")
+        timestamp = tow_result.get("timestamp", "")
+        
+        # Create base row for this tow
+        base_row = {
+            "tow_number": tow_num,
+            "timestamp": timestamp
+        }
+        
+        # Process form data
+        form_data = tow_result.get("form_data", {})
+        if form_data.get("extraction_methods"):
+            form_row = base_row.copy()
+            form_row["data_type"] = "form"
+            form_row["file_path"] = form_data.get("file_path", "")
+            
+            # Add TrOCR results
+            trocr_data = form_data.get("extraction_methods", {}).get("trocr", {})
+            form_row["trocr_text"] = trocr_data.get("raw_text", "")
+            
+            # Add LayoutLM results
+            layoutlm_data = form_data.get("extraction_methods", {}).get("layoutlm", {})
+            for question, answer in layoutlm_data.items():
+                col_name = f"layoutlm_{question.lower().replace(' ', '_').replace('?', '').replace(',', '').replace('(', '').replace(')', '')[:50]}"
+                form_row[col_name] = answer
+            
+            # Add Donut results
+            donut_data = form_data.get("extraction_methods", {}).get("donut", {})
+            form_row["donut_text"] = donut_data.get("extracted_text", "")
+            
+            flattened_results.append(form_row)
+        
+        # Process notes data
+        notes_data = tow_result.get("notes_data", {})
+        if notes_data.get("extraction_methods"):
+            notes_row = base_row.copy()
+            notes_row["data_type"] = "notes"
+            notes_row["file_path"] = notes_data.get("file_path", "")
+            
+            # Add TrOCR results
+            trocr_data = notes_data.get("extraction_methods", {}).get("trocr", {})
+            notes_row["trocr_text"] = trocr_data.get("raw_text", "")
+            
+            # Add LayoutLM results
+            layoutlm_data = notes_data.get("extraction_methods", {}).get("layoutlm", {})
+            for question, answer in layoutlm_data.items():
+                col_name = f"layoutlm_{question.lower().replace(' ', '_').replace('?', '').replace(',', '').replace('(', '').replace(')', '')[:50]}"
+                notes_row[col_name] = answer
+            
+            # Add Donut results
+            donut_data = notes_data.get("extraction_methods", {}).get("donut", {})
+            notes_row["donut_text"] = donut_data.get("extracted_text", "")
+            
+            flattened_results.append(notes_row)
+    
+    # Write CSV
+    if flattened_results:
+        # Get all possible fieldnames
+        all_fieldnames = set()
+        for row in flattened_results:
+            all_fieldnames.update(row.keys())
+        
+        fieldnames = sorted(list(all_fieldnames))
+        
+        with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(flattened_results)
+        
+        logger.info(f"Results saved as CSV: {output_file}")
+
+
+def create_summary_report_by_tow(results: List[Dict], output_dir: str):
+    """Create a summary report for tow-based results."""
+    summary = {
+        "timestamp": results[0]["timestamp"] if results else "",
+        "total_tows": len(results),
+        "processing_summary": {
+            "tows_with_form": 0,
+            "tows_with_notes": 0,
+            "tows_with_both": 0,
+            "total_files_processed": 0
+        },
+        "extraction_methods": {
+            "trocr": {"success": 0, "errors": 0},
+            "layoutlm": {"success": 0, "errors": 0},
+            "donut": {"success": 0, "errors": 0}
+        },
+        "errors": []
+    }
+    
+    for tow_result in results:
+        tow_num = tow_result.get("tow_number", "")
+        has_form = bool(tow_result.get("form_data", {}).get("extraction_methods"))
+        has_notes = bool(tow_result.get("notes_data", {}).get("extraction_methods"))
+        
+        if has_form:
+            summary["processing_summary"]["tows_with_form"] += 1
+            summary["processing_summary"]["total_files_processed"] += 1
+            
+            # Check form extraction methods
+            form_methods = tow_result["form_data"].get("extraction_methods", {})
+            for method in ["trocr", "layoutlm", "donut"]:
+                if method in form_methods:
+                    if form_methods[method]:  # Has content
+                        summary["extraction_methods"][method]["success"] += 1
+                    else:
+                        summary["extraction_methods"][method]["errors"] += 1
+        
+        if has_notes:
+            summary["processing_summary"]["tows_with_notes"] += 1
+            summary["processing_summary"]["total_files_processed"] += 1
+            
+            # Check notes extraction methods
+            notes_methods = tow_result["notes_data"].get("extraction_methods", {})
+            for method in ["trocr", "layoutlm", "donut"]:
+                if method in notes_methods:
+                    if notes_methods[method]:  # Has content
+                        summary["extraction_methods"][method]["success"] += 1
+                    else:
+                        summary["extraction_methods"][method]["errors"] += 1
+        
+        if has_form and has_notes:
+            summary["processing_summary"]["tows_with_both"] += 1
+        
+        # Collect errors
+        for data_type in ["form_data", "notes_data"]:
+            data = tow_result.get(data_type, {})
+            if data.get("error"):
+                summary["errors"].append({
+                    "tow": tow_num,
+                    "type": data_type.replace("_data", ""),
+                    "error": data["error"]
+                })
+    
+    # Save summary report
+    summary_file = Path(output_dir) / "extraction_summary.json"
+    with open(summary_file, 'w') as f:
+        json.dump(summary, f, indent=2)
+    
+    logger.info(f"Summary report saved: {summary_file}")
+    
+    # Print summary to console
+    print("="*60)
+    print("MOCNESS EXTRACTION SUMMARY")
+    print("="*60)
+    print(f"Total tows processed: {summary['total_tows']}")
+    print(f"Total files processed: {summary['processing_summary']['total_files_processed']}")
+    print(f"Tows with forms: {summary['processing_summary']['tows_with_form']}")
+    print(f"Tows with notes: {summary['processing_summary']['tows_with_notes']}")
+    print(f"Tows with both form and notes: {summary['processing_summary']['tows_with_both']}")
+    
+    print("\nExtraction method performance:")
+    for method, stats in summary["extraction_methods"].items():
+        total = stats["success"] + stats["errors"]
+        if total > 0:
+            success_rate = (stats["success"] / total) * 100
+            print(f"  {method.upper()}: {stats['success']}/{total} ({success_rate:.1f}% success)")
+    
+    if summary["errors"]:
+        print(f"\nErrors encountered:")
+        for error in summary["errors"]:
+            print(f"  Tow {error['tow']} ({error['type']}): {error['error']}")
+    print("="*60)
