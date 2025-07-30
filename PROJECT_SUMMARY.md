@@ -95,24 +95,50 @@ This project implements an **open source solution** for extracting structured da
 
 ## 🚀 Current Status
 
-### ✅ What's Working
-1. **Setup Complete**: All dependencies installed and verified
-2. **Code Complete**: Full implementation with all three extraction methods
-3. **Documentation**: Comprehensive README and inline documentation
-4. **Testing Ready**: Sample image generator available
-5. **User-Friendly**: VS Code tasks and command-line interface
+### ✅ What's Working (HPC Tested - July 30, 2025)
+1. **Mamba Environment**: Successfully created and activated
+2. **TrOCR Extraction**: ✅ Working perfectly (~4-5 seconds per image)
+3. **Code Bug Fixed**: LayoutLMv3 `input_ids` attribute access corrected
+4. **Dependencies Updated**: Added protobuf, sentencepiece to environment.yml
 
-### 🔍 Verification Results (Last Run)
+### 🔧 Issues Identified & Fixed
+1. **LayoutLMv3 Bug**: Fixed `'dict' object has no attribute 'input_ids'` error
+   - **Root Cause**: Accessing `encoding.input_ids` instead of `encoding['input_ids']`
+   - **Solution**: Updated main.py to use dictionary access
+   
+2. **Missing Dependencies**: Added to environment.yml and troubleshooting script
+   - **protobuf**: Required for Donut model tokenizer
+   - **sentencepiece**: Required for Donut tokenizer instantiation
+   - **tesseract**: System dependency for LayoutLMv3
+   - **layoutparser**: Additional LayoutLMv3 dependencies
+
+### 📋 Next Steps for Full HPC Deployment
+1. **Update Environment**: Recreate with new environment.yml
+2. **Install Dependencies**: Run `./hpc_troubleshoot_comprehensive.sh`
+3. **Test Individual Methods**:
+   - `python main.py --method trocr` (already working)
+   - `python main.py --method layoutlm` (should work after fixes)
+   - `python main.py --method donut` (should work after dependencies)
+4. **Full Pipeline Test**: `python main.py` (all methods together)
+3. **File Processing**: ✅ Automated discovery and batch processing
+4. **Output Generation**: ✅ JSON, CSV, and summary reports created
+5. **Error Handling**: ✅ Graceful degradation when models fail
+
+### ⚠️ Issues Identified (with Solutions)
+1. **LayoutLMv3**: ❌ Missing tesseract OCR engine
+   - **Fix**: `mamba install tesseract`
+2. **Donut**: ❌ Missing protobuf library  
+   - **Fix**: `mamba install protobuf`
+
+### 🔍 HPC Test Results (Latest)
 ```
-✅ Python 3.12.3
-✅ PyTorch 2.7.1+cu126
-ℹ️  CUDA not available - will use CPU
-✅ Transformers 4.54.1
-✅ Transformers working correctly
-✅ .env file found
-✅ INPUT_DIR configured in .env
-✅ OUTPUT_DIR configured in .env
-✅ Created input and output directories
+✅ Environment: mocness-extraction activated
+✅ Found 4 MOCNESS files (2 forms, 2 notes)
+✅ TrOCR: Successfully processed all images
+❌ LayoutLMv3: tesseract not installed error
+❌ Donut: protobuf library not found error
+✅ Output: All JSON/CSV files generated correctly
+Processing Speed: ~20 seconds total for 4 images (CPU only)
 ```
 
 ## 🎯 Next Steps for Resume
@@ -212,6 +238,9 @@ uv run python main.py --method trocr
 ./setup_hpc.sh
 mamba activate mocness-extraction
 
+# Fix dependencies (if issues found)
+./hpc_troubleshoot_comprehensive.sh
+
 # Verify setup
 python setup_check_mamba.py
 
@@ -222,6 +251,15 @@ python main.py
 # SLURM job submission
 sbatch slurm_job.sh  # (create based on README_MAMBA.md examples)
 ```
+
+## 🩺 Troubleshooting Scripts
+
+### For HPC Environments
+- **`hpc_troubleshoot.sh`**: Basic dependency check and installation
+- **`hpc_troubleshoot_comprehensive.sh`**: Complete fix for all identified issues
+  - Installs missing dependencies (protobuf, sentencepiece, tesseract)
+  - Tests all model loading
+  - Provides debugging information for LayoutLMv3 issues
 
 ### Universal Commands (Both Versions)
 ```bash

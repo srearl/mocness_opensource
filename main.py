@@ -161,7 +161,7 @@ class MOCNESSExtractor:
                 answer_start_index = outputs.start_logits.argmax()
                 answer_end_index = outputs.end_logits.argmax()
                 
-                predict_answer_tokens = encoding.input_ids.squeeze()[
+                predict_answer_tokens = encoding['input_ids'].squeeze()[
                     answer_start_index:answer_end_index + 1
                 ]
                 answer = self.layoutlm_processor.tokenizer.decode(

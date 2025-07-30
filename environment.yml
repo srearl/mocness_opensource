@@ -11,8 +11,12 @@ dependencies:
   - pillow>=10.0
   - opencv
   - pytesseract
+  - protobuf
+  - sentencepiece
   - pip:
     - transformers>=4.20.0
     - datasets>=4.0.0
     - python-dotenv>=1.0.0
     - huggingface-hub
+    - layoutparser[layoutmodels,tesseract]
+    - detectron2

@@ -2,8 +2,17 @@
 # MOCNESS HPC Troubleshooting Script
 
 echo "=================================================="
-echo "MOCNESS HPC Troubleshooting"
+echo "MOCNESS HPC Troubleshooting - Fix Dependencies"
 echo "=================================================="
+
+# Check if we're in the right environment
+if [[ "$CONDA_DEFAULT_ENV" != "mocness-extraction" ]]; then
+    echo "⚠️  Not in mocness-extraction environment"
+    echo "Please run: mamba activate mocness-extraction"
+    exit 1
+fi
+
+echo "✅ In mocness-extraction environment"
 
 # Check current resources
 echo "Current resource usage:"
@@ -91,8 +100,43 @@ echo "MAMBA_PKGS_DIRS=$MAMBA_PKGS_DIRS"
 echo "CONDA_PKGS_DIRS=$CONDA_PKGS_DIRS"
 echo ""
 
+# Install missing dependencies based on the log errors
+echo "📦 Installing missing dependencies for MOCNESS extraction..."
+
+# Install tesseract-ocr (for LayoutLMv3)
+echo "Installing tesseract..."
+mamba install -y tesseract
+
+# Install protobuf (for Donut)
+echo "Installing protobuf..."
+mamba install -y protobuf
+
+# Verify installations
+echo ""
+echo "🔍 Verifying installations..."
+
+# Check tesseract
+if command -v tesseract &> /dev/null; then
+    echo "✅ Tesseract installed: $(tesseract --version | head -1)"
+else
+    echo "❌ Tesseract still not found"
+fi
+
+# Check protobuf in Python
+python -c "import google.protobuf; print('✅ Protobuf installed:', google.protobuf.__version__)" 2>/dev/null || echo "❌ Protobuf not available in Python"
+
+echo ""
 echo "=================================================="
-echo "Next steps:"
+echo "✅ Dependencies should now be fixed!"
+echo "Test commands:"
+echo "  python main.py --method trocr     # Test TrOCR (already working)"
+echo "  python main.py --method layoutlm  # Test LayoutLM (should work now)"
+echo "  python main.py --method donut     # Test Donut (should work now)"
+echo "  python main.py                    # Test all methods"
+echo "=================================================="
+
+echo "=================================================="
+echo "Original next steps:"
 echo "1. If not in SLURM job: salloc --mem=16G --cpus-per-task=4 --time=2:00:00"
 echo "2. Load conda: module load miniconda3 (or similar)"
 echo "3. Create environment: $CONDA_CMD env create -f environment.yml"
