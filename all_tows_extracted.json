@@ -1,0 +1,67 @@
+[
+  {
+    "tow_number": "1",
+    "timestamp": "2025-07-30T15:53:33.088463",
+    "extraction_method": "all",
+    "form_data": {
+      "file_path": "/scratch/srearl/datasheet_scans/justone/tow_1_form.png",
+      "timestamp": "2025-07-30T15:53:33.412716",
+      "extraction_methods": {
+        "tesseract": {
+          "raw_text": "MOCNESS DATA SHEET\n\nFin mal \\Ww Gwlu\n\na\n\nf\n\na\n\nf\n\nCruise 2440 +t Location\n\n4\n\nvulshh Tow# Moc\n\ni\n\nDate\n\nY MAY 2024\n\nWind Speed\n\nDirection 2A\\\u00b0\n\nYear/Day\n\nSea State\n\nto\n\n41\n\nLocal Time \\\\ 02\n\nStart Lat 27\u00b0/\u00a2.44/M Long {i|\u00b0 | F.064W\n\nGMT Time 1962\n\nto Z\\W+\n\nEnd Lat at |S,.240 \u201cLong Wh? 14 LWSow\n\nNet Size\n\nlan\n\nNet Condition\n\nNet Mesh 200 4m\n\nProcessed\n\nRaw Filename\n\nFilename\n\nNET TOW INFORMATION\n\nTime Depth Angle\n\nFlow\n\nVolume\n\nMWO\n\nComments\n\nCounts\n\nFiltered Net\n\nwenn eee ee LY ee ee ee ee ree\n\nStart\n\nNet 0\n\nDown {{O2\n\n1015\n\n23.0 20\\\n\n1196.2\n\n}>92.3\n\n}\n\nNet 1\n\nAe\n\na\n\n| \u00a2\n\nvo\n\n|205.\n\n[20+\n\natte\n\nGog Net2\n\n1230\n\nAVY 284 ay\n\n509 Net 3\n\n499.5\n\n35.0\n\nBSP Net 4\n\naf)\n\n1032.2\n\n2m Net 5\n\n~ hin plea etna d\n\n[33S\n\nJ49.%\n\n45.\n\nBb\n\n62b. 4\n\n321\n\nLOS Net 6\n\n200. 2.\n\no\n\na4\n\n\\69 Net7\n\nNet 8\n\nNn\n\n10.0 65\n\n4\n\naly Ye\n\nte\n\nClosed\n\nBRS\n\n454] [2 270.4\n\nombu LBs\n\nCOMMENTS: 0.\n\nHii\n\n{\n\ni"
+        },
+        "trocr": {
+          "raw_text": "IN AMOUNT NAME"
+        },
+        "layoutlm": {
+          "What is the cruise number?": "",
+          "What is the tow number?": "",
+          "What is the date?": "",
+          "What is the location?": "",
+          "What is the local start time?": "",
+          "What is the local end time?": "",
+          "What is the GMT start time?": "",
+          "What is the GMT end time?": "",
+          "What is the start latitude?": "",
+          "What is the start longitude?": "",
+          "What is the end latitude?": "",
+          "What is the end longitude?": "",
+          "What is the wind speed?": "",
+          "What is the wind direction?": "",
+          "What is the sea state?": "",
+          "What is the net size?": "",
+          "What is the net mesh size?": "",
+          "What is the net condition percentage?": ""
+        },
+        "donut": {
+          "extracted_text": ""
+        }
+      }
+    },
+    "notes_data": {
+      "file_path": "/scratch/srearl/datasheet_scans/justone/tow_1_notes.png",
+      "timestamp": "2025-07-30T15:56:40.261185",
+      "extraction_methods": {
+        "tesseract": {
+          "raw_text": "Notes (Cont-)\n\nNL - MASSIVE BONA Atsccuded jellies seporate loatt-L\n\nNV - myctopads + shwime ~ Sale (single).\n\nNx - sales \\ oshroacddS\n\nNS- clear communtiy , a ehiporls, heteropod, pyrosonne\n\nrere pods (striore) ,\n\nNo- gelaimeys \u2014CHen oye (Clo-nana, euch , Araloiaw \u2014\n\n.\n\nVv\n\nye Mes Sam pied oo DNA\n\nNF > cs opods , ]eUres EADNA, doliohd reece s\n\nNS - SPW >\n\n8"
+        },
+        "trocr": {
+          "raw_text": "THANK"
+        },
+        "layoutlm": {
+          "What biological specimens were observed?": "",
+          "What are the comments for each net?": "",
+          "What preservation methods were used?": "",
+          "What special observations were made?": "",
+          "What samples were collected for DNA?": "",
+          "What jellies or other organisms were noted?": "",
+          "What splitting ratios were recorded?": "",
+          "What biomass observations were made?": ""
+        },
+        "donut": {
+          "extracted_text": "damasdamasdamasdamas<sep/> phen N3 -styramp (single).<s_cnt> N4 -<sep/> SUS- phenols,<sep/> phenols,<sep/> phenols,<sep/> phenol propie N5-dean com munity, anhital phenols, heteropod, pyosome, phos (striate),\u8cea\u8cea\u8cea N6 -\u8cea\u306a\u8cea\u306a\u8cea\u306a\u8cea\u306a\u8cea\u306a\u8cea\u306a\u8cea\u306a\u8cea\u306a\u8cea\u306a\u8cea\u306a\u8cea\u306a\u8cea\u306a\u8cea\u306a\u8cea\u306a\u8cea\u306a"
+        }
+      }
+    }
+  }
+]

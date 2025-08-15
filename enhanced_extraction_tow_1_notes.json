@@ -1,0 +1,27 @@
+{
+  "file_path": "/home/srearl/localRepos/mocness_opensource/justone/tow_1_notes.png",
+  "structure_analysis": {
+    "total_regions": 1,
+    "regions": [
+      {
+        "x": 0,
+        "y": 0,
+        "width": 2550,
+        "height": 3300,
+        "area": 8415000
+      }
+    ]
+  },
+  "text_extraction": {
+    "original_ocr": "Notes (eons) 7\nNi - MASSIVE AtONO Atscouded - jellies seprrate loath\n\nN34 - MYCIOPAASS + Shvrimnd - sale (single),\n\nNe - sakes \\ oO erocdds\n\nNS- clean community , am phi pols, heteroped, pyrosome y\nPhucpeds (striate),\n\nN6- MCs Aen 0, cucldihome , euph , Fraloiaw \u2014\njeMes sampled fy DNA\n\nNF - hetacpeds, jeUves EADNA, Adliohd , rZaHis\nNG - Seithing \u2018fe\n\nNa - Reval nou ttl - Selithin oy 8,",
+    "contrast_basic": "Notes (Cont-) |\nAJL - MASSIVE BONA Atsccuded - jellies septuate loath.\nNZ - myctopads + snwime ~ Sale (single),\nNA- salps , ostrocdds\nNS- clear communtiy , a ehiporls, heteropod, pyrosome\nPrucspeds (Striare) |\nNe- geloinous \u2014Chen cs criclo\u201cheana, h. , Araloiaw \u2014\njeNes tampecsopNe\nNF - cAcropods, jeU1e3 DNA, Aaliohd rises\n\\\nNY - SPW \u2018A\niB",
+    "contrast_detailed": "Notes (Cont-)\n\nAJL - MASSIVE BONA Atsccuded - jellies seporate loath\n\nNZ - myctopads + snwime ~ Sale (single),\n\nNx - Sales , oshacdd S\n\nNS- clear communtiy , a ehiporls, heteropod, pyrosome\n\nrere pods (striore) ,\n\nNe- gelaimeys \u2014CHen cyt (Clo-neana | euph , Hraloiaw \u2014\n\n.\n\nv\n\nees BAM pec ee DNA\n\nNF > cs ropods , jeUres EADNA, doliohd reece\n\nNS - SPW \u201c>\n\n8",
+    "adaptive_basic": "OTT EN OTT . |\n|\n|\n|\n\nNotes (Cont-) : : |\nNi - MASSIVE Atolla dtsqmded\u2019 - jellies seprrate loath |\nNZ - mychopmds talneime - sale (singe). |\na .\n\nNH- sales , ostracdds . |\nNS- clear community , 4\u201d ehi pos > , heteroped, pyrosome \\ |\npiercpods (smote), ~ |\n\nN6 - Gelosines \u2014CHE Bislsrhara, euph , Fraloiden \u2014 |\n= yeles GAM Pid Coy DNS :\n\nrey . ; rg twee: ep ewes |\n\nN7 - ech\u00e9xopwds, jeUres DNA, dotiohd , rhyzioudies\n\neS J ial !\n\n\u2018\n\nNg - Splttung fy 2\n=. y\n\nNQ - Revel nou ttl - Se\\itton oy Ig,\n|\n|\n\n> \u00b0 | :\nfe \u201c\n: - |\nI\n\n|\n\nI\n\n|\n\n\u2018 | i\n\n|",
+    "adaptive_detailed": "\u2014-\u2014\n\naS oS\n\n==\n\nNotes (Cont-)\n\nww\n\nNb - MASSIVE Aro dtseael\n\n7 aaa\n\ni ~ jellves separate lath\n\nNZ - mycroPuds + elrime - sale (singe)\n\nNx es oO skoacdd Ss\n\n{\n\nNS- clear communtiy , am ehiposls heteroped, pyrosome y\n\nrere pods (striore)\n\ntony\n\nNo -\u00a7\n\nNESS \u2014CHEMG; Be\n\nSHhave, euch Fraloidw \u2014\n\nDNA\n\nj*\n\nMes sam pled.\n\nN4\n\niS\n\nAS\n\nSs, j tres Fa DNA, dati ohd r Avzios ES\n\nNS Se WTI fy\n\nJ\n\nN\u00ae - Revel nou Tatl Se\\itton oy \u20188\n\ni]\n\nNea\n\ni\n\nmu\n\n|",
+    "morphed_basic": "OTT EN OTT . |\n|\n|\n|\n\nNotes (Cont-) : : |\nNi - MASSIVE Atolla dtsqmded\u2019 - jellies seprrate loath |\nNZ - mychopmds talneime - sale (singe). |\na .\n\nNH- sales , ostracdds . |\nNS- clear community , 4\u201d ehi pos > , heteroped, pyrosome \\ |\npiercpods (smote), ~ |\n\nN6 - Gelosines \u2014CHE Bislsrhara, euph , Fraloiden \u2014 |\n= yeles GAM Pid Coy DNS :\n\nrey . ; rg twee: ep ewes |\n\nN7 - ech\u00e9xopwds, jeUres DNA, dotiohd , rhyzioudies\n\neS J ial !\n\n\u2018\n\nNg - Splttung fy 2\n=. y\n\nNQ - Revel nou ttl - Se\\itton oy Ig,\n|\n|\n\n> \u00b0 | :\nfe \u201c\n: - |\nI\n\n|\n\nI\n\n|\n\n\u2018 | i\n\n|",
+    "morphed_detailed": "\u2014-\u2014\n\naS oS\n\n==\n\nNotes (Cont-)\n\nww\n\nNb - MASSIVE Aro dtseael\n\n7 aaa\n\ni ~ jellves separate lath\n\nNZ - mycroPuds + elrime - sale (singe)\n\nNx es oO skoacdd Ss\n\n{\n\nNS- clear communtiy , am ehiposls heteroped, pyrosome y\n\nrere pods (striore)\n\ntony\n\nNo -\u00a7\n\nNESS \u2014CHEMG; Be\n\nSHhave, euch Fraloidw \u2014\n\nDNA\n\nj*\n\nMes sam pled.\n\nN4\n\niS\n\nAS\n\nSs, j tres Fa DNA, dati ohd r Avzios ES\n\nNS Se WTI fy\n\nJ\n\nN\u00ae - Revel nou Tatl Se\\itton oy \u20188\n\ni]\n\nNea\n\ni\n\nmu\n\n|",
+    "denoised_basic": "Notes (eons) 7\nNb - MASSIVE AtONO Atscouded - jellies seprrate loath\nN34 - MYCIOPAASS + Shvrind - sale (single),\nNie - sakes \\ Oo erocdds\nNS- clean community , am ehiporls, heteroped, pyrosome\nPhucpeds (striate),\nN6- golostncys Aen o, cucldihome , euph , Fraloidea \u2014\njeNes sampled Ge DNB\nNF - her Aopeds, j eres EADNA, daliohd hizo iA\nNG - Setting \u2018fe\nNa - Reval nou ttl - Selittin oy 3,\nae",
+    "denoised_detailed": "\u2014\u2014\u2014O\n\nNotes (Cont-)\n\nJL - MASSIVE BONA Atscorded - jellies seporate lati\n\nNZ - myctopads + snwime - Sale (single),\n\nN4- salps , ostrocdds\n\nNS- clear communtiy , a ehi pox > , hetroped, pyrosomne\n\nrere pods (striore) ,\n\nN6-\n\nMASS \u2014CHENO, cUdihare, euph , AraloiaAw \u2014\n\njeMes sampled fy DNA\n\nNF - hetacpeds, jeUves EADNA, Adliohd , rZcaris\n\nNG - Setting \u2018fe\n\nN - Revel nou ttl - Se\\ittin oy 3,",
+    "trocr": "THANK"
+  }
+}

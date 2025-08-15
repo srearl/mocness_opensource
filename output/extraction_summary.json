@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-07-30T15:03:58.670669",
+  "total_tows": 1,
+  "processing_summary": {
+    "tows_with_form": 0,
+    "tows_with_notes": 0,
+    "tows_with_both": 0,
+    "total_files_processed": 0
+  },
+  "extraction_methods": {
+    "trocr": {
+      "success": 0,
+      "errors": 0
+    },
+    "layoutlm": {
+      "success": 0,
+      "errors": 0
+    },
+    "donut": {
+      "success": 0,
+      "errors": 0
+    }
+  },
+  "errors": [
+    {
+      "tow": "1",
+      "type": "form",
+      "error": "Cannot instantiate this tokenizer from a slow version. If it's based on sentencepiece, make sure you have sentencepiece installed."
+    },
+    {
+      "tow": "1",
+      "type": "notes",
+      "error": "Cannot instantiate this tokenizer from a slow version. If it's based on sentencepiece, make sure you have sentencepiece installed."
+    }
+  ]
+}

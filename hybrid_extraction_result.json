@@ -1,0 +1,89 @@
+{
+  "tow_number": "1",
+  "timestamp": "2025-07-30T15:23:37.775352",
+  "extraction_method": "hybrid_tesseract",
+  "form_data": {
+    "file_path": "/home/srearl/localRepos/mocness_opensource/justone/tow_1_form.png",
+    "raw_text": "MOCNESS DATA SHEET\n\nFin mal \\W Gwlu\n\n/\n\n\u00e9\n\na\n\nf\n\nCruise 2440 +t Location\n\n4\n\nvutshh Tow# Moc\n\n\\\n\nDate\n\nY MAY 2024\n\nWind Speed\n\nDirection 2\\\u00b0\n\nYear/Day\n\nSea State\n\nto\n\nIt\n\nLocal Time \\\\ O02\n\nStart Lat 27\u00b0/\u00a2.44/M Long |i] \u00b0 | F.064W\n\nGMT Time 1962\n\nto ZW\n\nEnd Lat at |S,.240 \u201cLong Wh? \\Y LWow\n\nNet Size\n\nlim\n\nNet Condition\n\nNet Mesh 200 4m\n\nProcessed\n\nRaw Filename\n\nFilename\n\nNET TOW INFORMATION\n\nTime Depth Angle\n\nFlow\n\nVolume\n\nMWO\n\nComments\n\nCounts\n\nFiltered Net\n\nween ee ee ee LS ee ee ee ee ee nn rene\n\nStart\n\nNet 0\n\nDown {{O2\n\n1015\n\n23,0 20\\\n\n1196.2\n\n}O92.3\n\n}\n\nNet 1\n\nAe\n\nie\n\n| \u00a2\n\nla\n\n|205.\n\n[20+\n\nYin? 2\n\natte.\n\nGog Net2\n\nIn 30\n\nt9 4.4\n\nAVY 284 ay\n\n509 Net 3\n\n499.5\n\n35.0\n\nBSP Net 4\n\n15\n\n4 |\n\n1032,\n\n_\n\n= ( |\n\n72sm Net 5\n\n\u201chin pleat etna d\n\n1335\n\n249.9\n\n45.\n\nBb\n\n626.\n\n321\n\nLOS Net 6\n\n200. 2.\n\ne)\n\nB43\n\n\\69 Net 7\n\nNet 8\n\nan Ay\n\n10.0 65\n\n4\n\n\u2018fy cake\n\nClosed\n\nBRS\n\nTW\n\n454] je 276.4\n\nF a A ue\n\nombu LBs\n\nCOMMENTS: 0.\"\n\nHii\n\n{\n\nt",
+    "extracted_fields": {
+      "cruise": "2407",
+      "location": "",
+      "tow": "1",
+      "local_time_start": "1962",
+      "net_size": "1m\u00b2",
+      "wind_direction": "2\u00b0"
+    }
+  },
+  "notes_data": {
+    "file_path": "/home/srearl/localRepos/mocness_opensource/justone/tow_1_notes.png",
+    "raw_text": "Notes (Cont-)\n\nNL - MASSIVE BONA Atsccuded - jellies seporate loath\n\nNZ - myctopads + snwime ~ Sale (single),\n\nNx - Sales , oshacdd S\n\nNS- clear communtiy , a ehiporls, heteropod, pyrosome\n\nrere pods (striore) ,\n\nNe- gelaimeys \u2014CHen oyer (Clo-neana euph , Hraloiaw \u2014\n\n.\n\nv\n\n\\e Mes Sam ped ne DNA\n\nNF > cs ropods , | eUres EADNA, doliohd ree s\n\nNS - SPW \u201c>\n\n8",
+    "extracted_fields": {
+      "net_observations": {
+        "OTES": "(cont-)",
+        "1": "MASSIVE Atolla discarded jellies seporate loath",
+        "2": "myctopods + snwime ~ sale (single),",
+        "3": "sales , oshacdd s",
+        "4": "spw \u201c>",
+        "5": "gelaimeys \u2014chen oyer (clo-neana euph , hraloiaw \u2014",
+        "6": "> cs ropods , | eures eadna, doliohd ree s"
+      },
+      "biological_observations": [
+        "copepods",
+        "heteropods",
+        "pyrosomes",
+        "myctopods",
+        "DNA sampling",
+        "jellies"
+      ],
+      "preservation_methods": [
+        "DNA sampling"
+      ]
+    }
+  },
+  "combined_fields": {
+    "cruise": "2407",
+    "location": "",
+    "tow": "1",
+    "local_time_start": "1962",
+    "net_size": "1m\u00b2",
+    "wind_direction": "2\u00b0",
+    "nets": [
+      {
+        "net": "OTES",
+        "comments": "(cont-)"
+      },
+      {
+        "net": "1",
+        "comments": "MASSIVE Atolla discarded jellies seporate loath"
+      },
+      {
+        "net": "2",
+        "comments": "myctopods + snwime ~ sale (single),"
+      },
+      {
+        "net": "3",
+        "comments": "sales , oshacdd s"
+      },
+      {
+        "net": "4",
+        "comments": "spw \u201c>"
+      },
+      {
+        "net": "5",
+        "comments": "gelaimeys \u2014chen oyer (clo-neana euph , hraloiaw \u2014"
+      },
+      {
+        "net": "6",
+        "comments": "> cs ropods , | eures eadna, doliohd ree s"
+      }
+    ],
+    "biological_observations": [
+      "copepods",
+      "heteropods",
+      "pyrosomes",
+      "myctopods",
+      "DNA sampling",
+      "jellies"
+    ]
+  }
+}

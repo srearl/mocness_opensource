@@ -1,0 +1,397 @@
+2025-07-30 13:43:41,359 - INFO - Using device: cpu
+2025-07-30 13:43:41,360 - INFO - Using hybrid extraction for: /home/srearl/localRepos/mocness_opensource/justone/tow_1_form.png
+2025-07-30 13:43:41,783 - ERROR - Error with Tesseract OCR: No closing quotation
+2025-07-30 13:43:41,784 - INFO - Loading TrOCR model...
+2025-07-30 13:44:04,368 - INFO - TrOCR model loaded successfully
+2025-07-30 13:44:25,587 - INFO - Loading LayoutLMv3 model...
+2025-07-30 13:44:36,626 - INFO - LayoutLMv3 model loaded successfully
+2025-07-30 13:44:36,780 - ERROR - Error with LayoutLM question 'What is the cruise number?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:36,876 - ERROR - Error with LayoutLM question 'What is the tow number?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:36,969 - ERROR - Error with LayoutLM question 'What is the date?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:37,076 - ERROR - Error with LayoutLM question 'What is the location?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:37,235 - ERROR - Error with LayoutLM question 'What is the local start time?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:37,332 - ERROR - Error with LayoutLM question 'What is the local end time?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:37,426 - ERROR - Error with LayoutLM question 'What is the GMT start time?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:37,508 - ERROR - Error with LayoutLM question 'What is the GMT end time?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:37,602 - ERROR - Error with LayoutLM question 'What is the start latitude?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:37,686 - ERROR - Error with LayoutLM question 'What is the start longitude?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:37,801 - ERROR - Error with LayoutLM question 'What is the end latitude?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:37,885 - ERROR - Error with LayoutLM question 'What is the end longitude?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:37,966 - ERROR - Error with LayoutLM question 'What is the wind speed?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:38,065 - ERROR - Error with LayoutLM question 'What is the wind direction?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:38,151 - ERROR - Error with LayoutLM question 'What is the sea state?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:38,245 - ERROR - Error with LayoutLM question 'What is the net size?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:38,320 - ERROR - Error with LayoutLM question 'What is the net mesh size?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 13:44:38,410 - ERROR - Error with LayoutLM question 'What is the net condition percentage?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:27,558 - INFO - Starting MOCNESS extraction...
+2025-07-30 14:44:27,558 - INFO - Input directory: ./justone
+2025-07-30 14:44:27,559 - INFO - Output directory: ./output
+2025-07-30 14:44:27,559 - INFO - Method: all
+2025-07-30 14:44:27,562 - INFO - Using device: cpu
+2025-07-30 14:44:27,564 - INFO - Found 2 MOCNESS files
+2025-07-30 14:44:27,565 - INFO - Form files: 1
+2025-07-30 14:44:27,565 - INFO - Notes files: 1
+2025-07-30 14:44:27,566 - INFO - Processing 1 tow groups using method: all
+2025-07-30 14:44:27,567 - INFO - Processing tow 1
+2025-07-30 14:44:27,567 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:44:27,567 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:44:27,847 - INFO - Processing as form page
+2025-07-30 14:44:27,848 - INFO - Extracting with Tesseract OCR...
+2025-07-30 14:44:28,099 - ERROR - Error with Tesseract OCR: No closing quotation
+2025-07-30 14:44:28,100 - INFO - Extracting with TrOCR...
+2025-07-30 14:44:28,100 - INFO - Loading TrOCR model...
+2025-07-30 14:44:31,943 - INFO - TrOCR model loaded successfully
+2025-07-30 14:44:48,752 - INFO - Extracting with LayoutLMv3...
+2025-07-30 14:44:48,752 - INFO - Loading LayoutLMv3 model...
+2025-07-30 14:44:52,038 - INFO - LayoutLMv3 model loaded successfully
+2025-07-30 14:44:52,248 - ERROR - Error with LayoutLM question 'What is the cruise number?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:52,464 - ERROR - Error with LayoutLM question 'What is the tow number?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:52,692 - ERROR - Error with LayoutLM question 'What is the date?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:52,894 - ERROR - Error with LayoutLM question 'What is the location?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:53,093 - ERROR - Error with LayoutLM question 'What is the local start time?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:53,237 - ERROR - Error with LayoutLM question 'What is the local end time?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:53,389 - ERROR - Error with LayoutLM question 'What is the GMT start time?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:53,537 - ERROR - Error with LayoutLM question 'What is the GMT end time?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:53,724 - ERROR - Error with LayoutLM question 'What is the start latitude?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:53,971 - ERROR - Error with LayoutLM question 'What is the start longitude?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:54,125 - ERROR - Error with LayoutLM question 'What is the end latitude?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:54,329 - ERROR - Error with LayoutLM question 'What is the end longitude?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:54,499 - ERROR - Error with LayoutLM question 'What is the wind speed?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:54,672 - ERROR - Error with LayoutLM question 'What is the wind direction?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:54,819 - ERROR - Error with LayoutLM question 'What is the sea state?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:54,976 - ERROR - Error with LayoutLM question 'What is the net size?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:55,138 - ERROR - Error with LayoutLM question 'What is the net mesh size?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:55,298 - ERROR - Error with LayoutLM question 'What is the net condition percentage?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:44:55,326 - INFO - Extracting with Donut...
+2025-07-30 14:44:55,327 - INFO - Loading Donut model...
+2025-07-30 14:44:56,500 - ERROR - Error loading Donut: 
+ requires the protobuf library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/protocolbuffers/protobuf/tree/master/python#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+2025-07-30 14:44:56,501 - ERROR - Error processing justone/tow_1_form.png: 
+ requires the protobuf library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/protocolbuffers/protobuf/tree/master/python#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+2025-07-30 14:44:56,512 - INFO - Processing notes: justone/tow_1_notes.png
+2025-07-30 14:44:56,513 - INFO - Processing form: justone/tow_1_notes.png
+2025-07-30 14:44:56,692 - INFO - Processing as notes page
+2025-07-30 14:44:56,692 - INFO - Extracting with Tesseract OCR...
+2025-07-30 14:44:56,846 - ERROR - Error with Tesseract OCR: No closing quotation
+2025-07-30 14:44:56,847 - INFO - Extracting with TrOCR...
+2025-07-30 14:45:08,041 - INFO - Extracting with LayoutLMv3...
+2025-07-30 14:45:08,175 - ERROR - Error with LayoutLM question 'What biological specimens were observed?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:08,346 - ERROR - Error with LayoutLM question 'What are the comments for each net?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:08,468 - ERROR - Error with LayoutLM question 'What preservation methods were used?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:08,579 - ERROR - Error with LayoutLM question 'What special observations were made?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:08,712 - ERROR - Error with LayoutLM question 'What samples were collected for DNA?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:08,837 - ERROR - Error with LayoutLM question 'What jellies or other organisms were noted?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:08,959 - ERROR - Error with LayoutLM question 'What splitting ratios were recorded?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:09,091 - ERROR - Error with LayoutLM question 'What biomass observations were made?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:09,097 - INFO - Extracting with Donut...
+2025-07-30 14:45:09,098 - INFO - Loading Donut model...
+2025-07-30 14:45:09,523 - ERROR - Error loading Donut: 
+ requires the protobuf library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/protocolbuffers/protobuf/tree/master/python#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+2025-07-30 14:45:09,524 - ERROR - Error processing justone/tow_1_notes.png: 
+ requires the protobuf library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/protocolbuffers/protobuf/tree/master/python#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+2025-07-30 14:45:09,541 - INFO - Saved combined results for tow 1 to output/tow_1_complete.json
+2025-07-30 14:45:09,542 - INFO - Summary report saved: output/extraction_summary.json
+2025-07-30 14:45:09,542 - INFO - Processing complete. Results saved to output
+2025-07-30 14:45:09,656 - INFO - Starting MOCNESS extraction...
+2025-07-30 14:45:09,656 - INFO - Input directory: ./justone
+2025-07-30 14:45:09,656 - INFO - Output directory: ./output
+2025-07-30 14:45:09,656 - INFO - Method: all
+2025-07-30 14:45:09,656 - INFO - Using device: cpu
+2025-07-30 14:45:09,657 - INFO - Found 2 MOCNESS files
+2025-07-30 14:45:09,657 - INFO - Form files: 1
+2025-07-30 14:45:09,658 - INFO - Notes files: 1
+2025-07-30 14:45:09,658 - INFO - Processing 1 tow groups using method: all
+2025-07-30 14:45:09,659 - INFO - Processing tow 1
+2025-07-30 14:45:09,659 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:45:09,659 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:45:09,891 - INFO - Processing as form page
+2025-07-30 14:45:09,891 - INFO - Extracting with Tesseract OCR...
+2025-07-30 14:45:10,173 - ERROR - Error with Tesseract OCR: No closing quotation
+2025-07-30 14:45:10,173 - INFO - Extracting with TrOCR...
+2025-07-30 14:45:10,173 - INFO - Loading TrOCR model...
+2025-07-30 14:45:12,705 - INFO - TrOCR model loaded successfully
+2025-07-30 14:45:26,623 - INFO - Extracting with LayoutLMv3...
+2025-07-30 14:45:26,623 - INFO - Loading LayoutLMv3 model...
+2025-07-30 14:45:28,273 - INFO - LayoutLMv3 model loaded successfully
+2025-07-30 14:45:28,393 - ERROR - Error with LayoutLM question 'What is the cruise number?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:28,509 - ERROR - Error with LayoutLM question 'What is the tow number?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:28,649 - ERROR - Error with LayoutLM question 'What is the date?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:28,832 - ERROR - Error with LayoutLM question 'What is the location?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:28,981 - ERROR - Error with LayoutLM question 'What is the local start time?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:29,141 - ERROR - Error with LayoutLM question 'What is the local end time?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:29,308 - ERROR - Error with LayoutLM question 'What is the GMT start time?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:29,507 - ERROR - Error with LayoutLM question 'What is the GMT end time?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:29,641 - ERROR - Error with LayoutLM question 'What is the start latitude?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:29,776 - ERROR - Error with LayoutLM question 'What is the start longitude?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:29,972 - ERROR - Error with LayoutLM question 'What is the end latitude?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:30,123 - ERROR - Error with LayoutLM question 'What is the end longitude?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:30,292 - ERROR - Error with LayoutLM question 'What is the wind speed?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:30,472 - ERROR - Error with LayoutLM question 'What is the wind direction?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:30,651 - ERROR - Error with LayoutLM question 'What is the sea state?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:30,822 - ERROR - Error with LayoutLM question 'What is the net size?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:30,978 - ERROR - Error with LayoutLM question 'What is the net mesh size?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:31,125 - ERROR - Error with LayoutLM question 'What is the net condition percentage?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:31,131 - INFO - Extracting with Donut...
+2025-07-30 14:45:31,132 - INFO - Loading Donut model...
+2025-07-30 14:45:31,680 - ERROR - Error loading Donut: 
+ requires the protobuf library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/protocolbuffers/protobuf/tree/master/python#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+2025-07-30 14:45:31,681 - ERROR - Error processing justone/tow_1_form.png: 
+ requires the protobuf library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/protocolbuffers/protobuf/tree/master/python#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+2025-07-30 14:45:31,698 - INFO - Processing notes: justone/tow_1_notes.png
+2025-07-30 14:45:31,698 - INFO - Processing form: justone/tow_1_notes.png
+2025-07-30 14:45:31,888 - INFO - Processing as notes page
+2025-07-30 14:45:31,889 - INFO - Extracting with Tesseract OCR...
+2025-07-30 14:45:32,053 - ERROR - Error with Tesseract OCR: No closing quotation
+2025-07-30 14:45:32,053 - INFO - Extracting with TrOCR...
+2025-07-30 14:45:43,723 - INFO - Extracting with LayoutLMv3...
+2025-07-30 14:45:43,839 - ERROR - Error with LayoutLM question 'What biological specimens were observed?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:43,970 - ERROR - Error with LayoutLM question 'What are the comments for each net?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:44,100 - ERROR - Error with LayoutLM question 'What preservation methods were used?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:44,364 - ERROR - Error with LayoutLM question 'What special observations were made?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:44,497 - ERROR - Error with LayoutLM question 'What samples were collected for DNA?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:44,639 - ERROR - Error with LayoutLM question 'What jellies or other organisms were noted?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:44,790 - ERROR - Error with LayoutLM question 'What splitting ratios were recorded?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:44,947 - ERROR - Error with LayoutLM question 'What biomass observations were made?': tesseract is not installed or it's not in your PATH. See README file for more information.
+2025-07-30 14:45:44,956 - INFO - Extracting with Donut...
+2025-07-30 14:45:44,956 - INFO - Loading Donut model...
+2025-07-30 14:45:45,491 - ERROR - Error loading Donut: 
+ requires the protobuf library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/protocolbuffers/protobuf/tree/master/python#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+2025-07-30 14:45:45,491 - ERROR - Error processing justone/tow_1_notes.png: 
+ requires the protobuf library but it was not found in your environment. Check out the instructions on the
+installation page of its repo: https://github.com/protocolbuffers/protobuf/tree/master/python#installation and follow the ones
+that match your environment. Please note that you may need to restart your runtime after installation.
+
+2025-07-30 14:45:45,523 - INFO - Saved combined results for tow 1 to output/tow_1_complete.json
+2025-07-30 14:45:45,524 - INFO - Summary report saved: output/extraction_summary.json
+2025-07-30 14:45:45,529 - INFO - Processing complete. Results saved to output
+2025-07-30 14:49:28,456 - INFO - Starting MOCNESS extraction...
+2025-07-30 14:49:28,456 - INFO - Input directory: ./justone
+2025-07-30 14:49:28,456 - INFO - Output directory: ./output
+2025-07-30 14:49:28,456 - INFO - Method: trocr
+2025-07-30 14:49:28,456 - INFO - Using device: cpu
+2025-07-30 14:49:28,457 - INFO - Found 2 MOCNESS files
+2025-07-30 14:49:28,458 - INFO - Form files: 1
+2025-07-30 14:49:28,458 - INFO - Notes files: 1
+2025-07-30 14:49:28,458 - INFO - Processing 1 tow groups using method: trocr
+2025-07-30 14:49:28,458 - INFO - Processing tow 1
+2025-07-30 14:49:28,458 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:49:28,458 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:49:28,765 - INFO - Processing as form page
+2025-07-30 14:49:28,768 - INFO - Extracting with TrOCR...
+2025-07-30 14:49:28,770 - INFO - Loading TrOCR model...
+2025-07-30 14:49:32,957 - INFO - TrOCR model loaded successfully
+2025-07-30 14:49:47,526 - INFO - Processing notes: justone/tow_1_notes.png
+2025-07-30 14:49:47,526 - INFO - Processing form: justone/tow_1_notes.png
+2025-07-30 14:49:47,691 - INFO - Processing as notes page
+2025-07-30 14:49:47,691 - INFO - Extracting with TrOCR...
+2025-07-30 14:49:54,800 - INFO - Saved combined results for tow 1 to output/tow_1_complete.json
+2025-07-30 14:49:54,801 - INFO - Results saved as CSV: output/all_extractions.csv
+2025-07-30 14:49:54,802 - INFO - Summary report saved: output/extraction_summary.json
+2025-07-30 14:49:54,802 - INFO - Processing complete. Results saved to output
+2025-07-30 14:49:54,856 - INFO - Starting MOCNESS extraction...
+2025-07-30 14:49:54,856 - INFO - Input directory: ./justone
+2025-07-30 14:49:54,857 - INFO - Output directory: ./output
+2025-07-30 14:49:54,857 - INFO - Method: trocr
+2025-07-30 14:49:54,857 - INFO - Using device: cpu
+2025-07-30 14:49:54,857 - INFO - Found 2 MOCNESS files
+2025-07-30 14:49:54,857 - INFO - Form files: 1
+2025-07-30 14:49:54,857 - INFO - Notes files: 1
+2025-07-30 14:49:54,858 - INFO - Processing 1 tow groups using method: trocr
+2025-07-30 14:49:54,858 - INFO - Processing tow 1
+2025-07-30 14:49:54,858 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:49:54,858 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:49:55,011 - INFO - Processing as form page
+2025-07-30 14:49:55,011 - INFO - Extracting with TrOCR...
+2025-07-30 14:49:55,011 - INFO - Loading TrOCR model...
+2025-07-30 14:49:56,604 - INFO - TrOCR model loaded successfully
+2025-07-30 14:50:02,667 - INFO - Processing notes: justone/tow_1_notes.png
+2025-07-30 14:50:02,667 - INFO - Processing form: justone/tow_1_notes.png
+2025-07-30 14:50:02,824 - INFO - Processing as notes page
+2025-07-30 14:50:02,824 - INFO - Extracting with TrOCR...
+2025-07-30 14:50:07,868 - INFO - Saved combined results for tow 1 to output/tow_1_complete.json
+2025-07-30 14:50:07,870 - INFO - Results saved as CSV: output/all_extractions.csv
+2025-07-30 14:50:07,871 - INFO - Summary report saved: output/extraction_summary.json
+2025-07-30 14:50:07,871 - INFO - Processing complete. Results saved to output
+2025-07-30 14:56:23,572 - INFO - Starting MOCNESS extraction...
+2025-07-30 14:56:23,572 - INFO - Input directory: ./justone
+2025-07-30 14:56:23,572 - INFO - Output directory: ./output
+2025-07-30 14:56:23,573 - INFO - Method: trocr
+2025-07-30 14:56:23,573 - INFO - Using device: cpu
+2025-07-30 14:56:23,574 - INFO - Found 2 MOCNESS files
+2025-07-30 14:56:23,574 - INFO - Form files: 1
+2025-07-30 14:56:23,574 - INFO - Notes files: 1
+2025-07-30 14:56:23,574 - INFO - Processing 1 tow groups using method: trocr
+2025-07-30 14:56:23,574 - INFO - Processing tow 1
+2025-07-30 14:56:23,574 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:56:23,574 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:56:23,885 - INFO - Processing as form page
+2025-07-30 14:56:23,887 - INFO - Extracting with TrOCR...
+2025-07-30 14:56:23,887 - INFO - Loading TrOCR model...
+2025-07-30 14:56:27,146 - INFO - TrOCR model loaded successfully
+2025-07-30 14:56:41,145 - INFO - Processing notes: justone/tow_1_notes.png
+2025-07-30 14:56:41,147 - INFO - Processing form: justone/tow_1_notes.png
+2025-07-30 14:56:41,422 - INFO - Processing as notes page
+2025-07-30 14:56:41,422 - INFO - Extracting with TrOCR...
+2025-07-30 14:56:53,169 - INFO - Saved combined results for tow 1 to output/tow_1_complete.json
+2025-07-30 14:56:53,170 - INFO - Results saved as CSV: output/all_extractions.csv
+2025-07-30 14:56:53,170 - INFO - Summary report saved: output/extraction_summary.json
+2025-07-30 14:56:53,170 - INFO - Processing complete. Results saved to output
+2025-07-30 14:56:53,289 - INFO - Starting MOCNESS extraction...
+2025-07-30 14:56:53,290 - INFO - Input directory: ./justone
+2025-07-30 14:56:53,290 - INFO - Output directory: ./output
+2025-07-30 14:56:53,290 - INFO - Method: trocr
+2025-07-30 14:56:53,290 - INFO - Using device: cpu
+2025-07-30 14:56:53,291 - INFO - Found 2 MOCNESS files
+2025-07-30 14:56:53,291 - INFO - Form files: 1
+2025-07-30 14:56:53,291 - INFO - Notes files: 1
+2025-07-30 14:56:53,291 - INFO - Processing 1 tow groups using method: trocr
+2025-07-30 14:56:53,291 - INFO - Processing tow 1
+2025-07-30 14:56:53,292 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:56:53,292 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:56:53,513 - INFO - Processing as form page
+2025-07-30 14:56:53,515 - INFO - Extracting with TrOCR...
+2025-07-30 14:56:53,516 - INFO - Loading TrOCR model...
+2025-07-30 14:56:55,871 - INFO - TrOCR model loaded successfully
+2025-07-30 14:57:09,262 - INFO - Processing notes: justone/tow_1_notes.png
+2025-07-30 14:57:09,262 - INFO - Processing form: justone/tow_1_notes.png
+2025-07-30 14:57:09,504 - INFO - Processing as notes page
+2025-07-30 14:57:09,504 - INFO - Extracting with TrOCR...
+2025-07-30 14:57:21,322 - INFO - Saved combined results for tow 1 to output/tow_1_complete.json
+2025-07-30 14:57:21,323 - INFO - Results saved as CSV: output/all_extractions.csv
+2025-07-30 14:57:21,323 - INFO - Summary report saved: output/extraction_summary.json
+2025-07-30 14:57:21,324 - INFO - Processing complete. Results saved to output
+2025-07-30 14:58:56,490 - INFO - Starting MOCNESS extraction...
+2025-07-30 14:58:56,490 - INFO - Input directory: ./justone
+2025-07-30 14:58:56,490 - INFO - Output directory: ./output
+2025-07-30 14:58:56,490 - INFO - Method: all
+2025-07-30 14:58:56,491 - INFO - Using device: cpu
+2025-07-30 14:58:56,492 - INFO - Found 2 MOCNESS files
+2025-07-30 14:58:56,492 - INFO - Form files: 1
+2025-07-30 14:58:56,492 - INFO - Notes files: 1
+2025-07-30 14:58:56,492 - INFO - Processing 1 tow groups using method: all
+2025-07-30 14:58:56,492 - INFO - Processing tow 1
+2025-07-30 14:58:56,492 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:58:56,492 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 14:58:56,835 - INFO - Processing as form page
+2025-07-30 14:58:56,837 - INFO - Extracting with Tesseract OCR...
+2025-07-30 14:59:10,834 - WARNING - OCR config failed: --oem 3 --psm 6 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,°\'"()[]{}:;-_/@#$%&+=?!, error: No closing quotation
+2025-07-30 14:59:10,838 - INFO - Extracting with TrOCR...
+2025-07-30 14:59:10,838 - INFO - Loading TrOCR model...
+2025-07-30 14:59:14,201 - INFO - TrOCR model loaded successfully
+2025-07-30 14:59:33,322 - INFO - Extracting with LayoutLMv3...
+2025-07-30 14:59:33,322 - INFO - Loading LayoutLMv3 model...
+2025-07-30 14:59:34,986 - INFO - LayoutLMv3 model loaded successfully
+2025-07-30 14:59:38,992 - ERROR - Error with LayoutLM question 'What is the cruise number?': index out of range in self
+2025-07-30 14:59:43,366 - ERROR - Error with LayoutLM question 'What is the tow number?': index out of range in self
+2025-07-30 14:59:47,843 - ERROR - Error with LayoutLM question 'What is the date?': index out of range in self
+2025-07-30 14:59:52,327 - ERROR - Error with LayoutLM question 'What is the location?': index out of range in self
+2025-07-30 14:59:56,977 - ERROR - Error with LayoutLM question 'What is the local start time?': index out of range in self
+2025-07-30 15:00:00,930 - ERROR - Error with LayoutLM question 'What is the local end time?': index out of range in self
+2025-07-30 15:00:04,760 - ERROR - Error with LayoutLM question 'What is the GMT start time?': index out of range in self
+2025-07-30 15:00:08,717 - ERROR - Error with LayoutLM question 'What is the GMT end time?': index out of range in self
+2025-07-30 15:00:13,300 - ERROR - Error with LayoutLM question 'What is the start latitude?': index out of range in self
+2025-07-30 15:00:18,283 - ERROR - Error with LayoutLM question 'What is the start longitude?': index out of range in self
+2025-07-30 15:00:23,092 - ERROR - Error with LayoutLM question 'What is the end latitude?': index out of range in self
+2025-07-30 15:01:06,081 - ERROR - Error with LayoutLM question 'What is the end longitude?': index out of range in self
+2025-07-30 15:01:26,436 - ERROR - Error with LayoutLM question 'What is the wind speed?': index out of range in self
+2025-07-30 15:01:53,766 - ERROR - Error with LayoutLM question 'What is the wind direction?': index out of range in self
+2025-07-30 15:02:07,208 - ERROR - Error with LayoutLM question 'What is the sea state?': index out of range in self
+2025-07-30 15:02:21,192 - ERROR - Error with LayoutLM question 'What is the net size?': index out of range in self
+2025-07-30 15:02:36,020 - ERROR - Error with LayoutLM question 'What is the net mesh size?': index out of range in self
+2025-07-30 15:03:04,635 - ERROR - Error with LayoutLM question 'What is the net condition percentage?': index out of range in self
+2025-07-30 15:03:04,636 - INFO - Extracting with Donut...
+2025-07-30 15:03:04,636 - INFO - Loading Donut model...
+2025-07-30 15:03:05,065 - ERROR - Error loading Donut: Cannot instantiate this tokenizer from a slow version. If it's based on sentencepiece, make sure you have sentencepiece installed.
+2025-07-30 15:03:05,065 - ERROR - Error processing justone/tow_1_form.png: Cannot instantiate this tokenizer from a slow version. If it's based on sentencepiece, make sure you have sentencepiece installed.
+2025-07-30 15:03:05,071 - INFO - Processing notes: justone/tow_1_notes.png
+2025-07-30 15:03:05,071 - INFO - Processing form: justone/tow_1_notes.png
+2025-07-30 15:03:05,197 - INFO - Processing as notes page
+2025-07-30 15:03:05,197 - INFO - Extracting with Tesseract OCR...
+2025-07-30 15:03:13,075 - WARNING - OCR config failed: --oem 3 --psm 6 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,°\'"()[]{}:;-_/@#$%&+=?!, error: No closing quotation
+2025-07-30 15:03:13,078 - INFO - Extracting with TrOCR...
+2025-07-30 15:03:25,144 - INFO - Extracting with LayoutLMv3...
+2025-07-30 15:03:58,101 - INFO - Extracting with Donut...
+2025-07-30 15:03:58,103 - INFO - Loading Donut model...
+2025-07-30 15:03:58,475 - ERROR - Error loading Donut: Cannot instantiate this tokenizer from a slow version. If it's based on sentencepiece, make sure you have sentencepiece installed.
+2025-07-30 15:03:58,475 - ERROR - Error processing justone/tow_1_notes.png: Cannot instantiate this tokenizer from a slow version. If it's based on sentencepiece, make sure you have sentencepiece installed.
+2025-07-30 15:03:58,495 - INFO - Saved combined results for tow 1 to output/tow_1_complete.json
+2025-07-30 15:03:58,499 - INFO - Summary report saved: output/extraction_summary.json
+2025-07-30 15:03:58,501 - INFO - Processing complete. Results saved to output
+2025-07-30 15:03:58,665 - INFO - Starting MOCNESS extraction...
+2025-07-30 15:03:58,666 - INFO - Input directory: ./justone
+2025-07-30 15:03:58,666 - INFO - Output directory: ./output
+2025-07-30 15:03:58,667 - INFO - Method: all
+2025-07-30 15:03:58,667 - INFO - Using device: cpu
+2025-07-30 15:03:58,669 - INFO - Found 2 MOCNESS files
+2025-07-30 15:03:58,669 - INFO - Form files: 1
+2025-07-30 15:03:58,670 - INFO - Notes files: 1
+2025-07-30 15:03:58,670 - INFO - Processing 1 tow groups using method: all
+2025-07-30 15:03:58,670 - INFO - Processing tow 1
+2025-07-30 15:03:58,670 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 15:03:58,670 - INFO - Processing form: justone/tow_1_form.png
+2025-07-30 15:03:58,930 - INFO - Processing as form page
+2025-07-30 15:03:58,932 - INFO - Extracting with Tesseract OCR...
+2025-07-30 15:04:13,972 - WARNING - OCR config failed: --oem 3 --psm 6 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,°\'"()[]{}:;-_/@#$%&+=?!, error: No closing quotation
+2025-07-30 15:04:13,974 - INFO - Extracting with TrOCR...
+2025-07-30 15:04:13,974 - INFO - Loading TrOCR model...
+2025-07-30 15:04:16,306 - INFO - TrOCR model loaded successfully
+2025-07-30 15:04:31,332 - INFO - Extracting with LayoutLMv3...
+2025-07-30 15:04:31,334 - INFO - Loading LayoutLMv3 model...
+2025-07-30 15:04:33,129 - INFO - LayoutLMv3 model loaded successfully
+2025-07-30 15:04:38,979 - ERROR - Error with LayoutLM question 'What is the cruise number?': index out of range in self
+2025-07-30 15:04:44,202 - ERROR - Error with LayoutLM question 'What is the tow number?': index out of range in self
+2025-07-30 15:04:51,104 - ERROR - Error with LayoutLM question 'What is the date?': index out of range in self
+2025-07-30 15:04:58,954 - ERROR - Error with LayoutLM question 'What is the location?': index out of range in self
+2025-07-30 15:05:05,258 - ERROR - Error with LayoutLM question 'What is the local start time?': index out of range in self
+2025-07-30 15:05:12,127 - ERROR - Error with LayoutLM question 'What is the local end time?': index out of range in self
+2025-07-30 15:05:18,574 - ERROR - Error with LayoutLM question 'What is the GMT start time?': index out of range in self
+2025-07-30 15:05:24,739 - ERROR - Error with LayoutLM question 'What is the GMT end time?': index out of range in self
+2025-07-30 15:05:30,204 - ERROR - Error with LayoutLM question 'What is the start latitude?': index out of range in self
+2025-07-30 15:05:36,556 - ERROR - Error with LayoutLM question 'What is the start longitude?': index out of range in self
+2025-07-30 15:05:43,923 - ERROR - Error with LayoutLM question 'What is the end latitude?': index out of range in self
+2025-07-30 15:05:51,572 - ERROR - Error with LayoutLM question 'What is the end longitude?': index out of range in self
+2025-07-30 15:05:57,097 - ERROR - Error with LayoutLM question 'What is the wind speed?': index out of range in self
+2025-07-30 15:06:00,925 - ERROR - Error with LayoutLM question 'What is the wind direction?': index out of range in self
+2025-07-30 15:06:11,420 - ERROR - Error with LayoutLM question 'What is the sea state?': index out of range in self
+2025-07-30 15:06:14,658 - ERROR - Error with LayoutLM question 'What is the net size?': index out of range in self
+2025-07-30 15:06:22,447 - ERROR - Error with LayoutLM question 'What is the net mesh size?': index out of range in self
+2025-07-30 15:06:27,011 - ERROR - Error with LayoutLM question 'What is the net condition percentage?': index out of range in self
+2025-07-30 15:06:27,011 - INFO - Extracting with Donut...
+2025-07-30 15:06:27,011 - INFO - Loading Donut model...
+2025-07-30 15:06:27,343 - ERROR - Error loading Donut: Cannot instantiate this tokenizer from a slow version. If it's based on sentencepiece, make sure you have sentencepiece installed.
+2025-07-30 15:06:27,343 - ERROR - Error processing justone/tow_1_form.png: Cannot instantiate this tokenizer from a slow version. If it's based on sentencepiece, make sure you have sentencepiece installed.
+2025-07-30 15:06:27,354 - INFO - Processing notes: justone/tow_1_notes.png
+2025-07-30 15:06:27,355 - INFO - Processing form: justone/tow_1_notes.png
+2025-07-30 15:06:27,509 - INFO - Processing as notes page
+2025-07-30 15:06:27,509 - INFO - Extracting with Tesseract OCR...
+2025-07-30 15:06:35,798 - WARNING - OCR config failed: --oem 3 --psm 6 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,°\'"()[]{}:;-_/@#$%&+=?!, error: No closing quotation
+2025-07-30 15:06:35,800 - INFO - Extracting with TrOCR...
+2025-07-30 15:06:42,435 - INFO - Extracting with LayoutLMv3...
+2025-07-30 15:07:02,630 - INFO - Extracting with Donut...
+2025-07-30 15:07:02,630 - INFO - Loading Donut model...
+2025-07-30 15:07:02,962 - ERROR - Error loading Donut: Cannot instantiate this tokenizer from a slow version. If it's based on sentencepiece, make sure you have sentencepiece installed.
+2025-07-30 15:07:02,962 - ERROR - Error processing justone/tow_1_notes.png: Cannot instantiate this tokenizer from a slow version. If it's based on sentencepiece, make sure you have sentencepiece installed.
+2025-07-30 15:07:02,973 - INFO - Saved combined results for tow 1 to output/tow_1_complete.json
+2025-07-30 15:07:02,974 - INFO - Summary report saved: output/extraction_summary.json
+2025-07-30 15:07:02,974 - INFO - Processing complete. Results saved to output

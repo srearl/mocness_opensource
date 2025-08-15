@@ -189,7 +189,7 @@ class MOCNESSExtractor:
             configs = [
                 r'--oem 3 --psm 6',  # Basic configuration
                 r'--oem 3 --psm 11', # Detailed sparse text
-                r'--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,°\'"()[]{}:;-_/@#$%&+=?!'
+                r'--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,°()[]{}:;-_/@#$%&+=?!'
             ]
             
             results = []
